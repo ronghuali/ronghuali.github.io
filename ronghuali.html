@@ -4,7 +4,7 @@
 xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:o="urn:schemas-microsoft-com:office:office" 
 xmlns:v="urn:schemas-microsoft-com:vml"><HEAD><META content="IE=5.0000" 
 http-equiv="X-UA-Compatible">
- 
+<meta charset="UTF-8">
 <META http-equiv="Content-Type" content="text/html; charset=windows-1252"> 
 <META name="ProgId" content="Word.Document"> 
 <META name="GENERATOR" content="MSHTML 11.00.10570.1001"> 
@@ -964,6 +964,18 @@ ul
  <o:shapelayout v:ext="edit">
   <o:idmap v:ext="edit" data="1"/>
  </o:shapelayout></xml><![endif]--> 
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        /*自动为每篇论文添加序号*/
+        $("#papers p").each(function(index,domEle){
+            $(domEle).prepend((index+1)+".&nbsp;&nbsp;");
+            $(domEle).css("font-size", "10pt");
+        })  
+    })
+</script>
+
 </HEAD> 
 <BODY lang="ZH-CN" style="tab-interval: 21.0pt;" link="blue" vlink="purple">
 <DIV class="WordSection1">
@@ -985,7 +997,7 @@ border="0" cellpadding="0">
       </SPAN></B><B><SPAN style='font-family: SimSun; font-size: 25pt; mso-ascii-font-family: "Times New Roman"; mso-fareast-font-family: SimSun; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: "Times New Roman";'>&#26446;&#33635;&#21326;</SPAN></B><B><SPAN 
       style='font-family: "Blackadder ITC"; font-size: 25pt;'> 
       </SPAN></B><B><SPAN lang="EN-US" style="font-size: 25pt;">) 
-      </SPAN></B><SPAN lang="EN-US"><BR><BR></SPAN><SPAN lang="EN-US" style="font-size: 13.5pt;">PhD, 
+      </SPAN></B><SPAN lang="EN-US"><BR><BR></SPAN><SPAN lang="EN-US" style="font-size: 13.5pt;">Professor, Beijing Institute of Technology<br>PhD, 
       The Chinese University  of Hong Kong</SPAN><SPAN 
       lang="EN-US"><BR><BR><B>Email</B>: <A href="mailto:lironghuascut@gmail.com">lironghuascut@gmail.com</A> 
        or <A href="mailto:rhli@szu.edu.cn">rhli@szu.edu.cn</A></SPAN></P>
@@ -1018,20 +1030,9 @@ border="0" cellpadding="0">
       <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Research 
       Interests</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
       <o:p></o:p></SPAN></P>
-      <P><SPAN lang="EN-US" style="font-size: 10pt;">Algorithm for (big) graph,  
-      matrix and sequence data with applications in the following areas: 
+      <P><SPAN lang="EN-US" style="font-size: 10pt;">Graph Data Management and Mining, Graph Computing System, Graph Neural Network, Graph Representation Learning, Knowledge Graph, Spectral Graph Theory and Applications, Graph Privacy Preserving, Graph Federated Learning. 
       <o:p></o:p></SPAN></P>
-      <UL type="disc">
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l5 level1 lfo1;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Social 
-              network analysis and network science<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l5 level1 lfo1;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Data</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;"> management</SPAN><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l5 level1 lfo1;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">D</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>ata 
-        mining<o:p></o:p></SPAN></LI></UL></TD></TR>
+      </TD></TR>
   <TR style="mso-yfti-irow: 2;">
     <TD width="99%" style="padding: 0.75pt; width: 99.6%;">
       <DIV align="center" class="MsoNormal" style="text-align: center;"><SPAN 
@@ -1040,510 +1041,236 @@ border="0" cellpadding="0">
       </SPAN></DIV></TD></TR>
   <TR style="mso-yfti-irow: 3;">
     <TD style="padding: 0.75pt;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Selected 
-      </SPAN></B><B><SPAN lang="EN-US" style="font-size: 18pt;">journal 
-      articles</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-      <A href="http://www.informatik.uni-trier.de/~ley/pers/hd/l/Li:Rong=Hua.html">(Full 
-       list) </A><o:p></o:p></SPAN></P>
-      <OL type="1" start="1">
-      <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        and</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              Lu Qin,Jeffrey Xu Yu,Rui Mao</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><BR>       Finding Influential Communities in Massive Networks</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href=""><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-                </SPAN></A><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">VLDB Journal 2017</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              </SPAN><I><SPAN lang="EN-US" 
-        style="font-size: 10pt;"></SPAN></I><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-               </SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>
-        <SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
+      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Selected Papers</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'></SPAN></P>
+            <div id="papers" >
+                <p>
+                    Yuxuan Qiu, Dong Wen, Lu Qin, Wentao Li, <strong>Rong-Hua Li</strong>, Ying Zhang. Efficient Shortest Path Counting on Large Road Networks, VLDB (<strong>CCF A类会议</strong>), 2022
+                </p>
 
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><SPAN 
-        lang="EN-US" style="font-size: 10pt; mso-bidi-font-weight: bold;">Can 
-        Lu, </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jeffrey 
-              Xu Y</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">u, 
-        <B>Rong-Hua Li<SUP>*</SUP></B>,       and Hao Wei<BR></SPAN><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Exploring 
-        Hierarchies in Online Social Networks</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"><A 
-        href="https://ronghuali.github.io/paper/tkdehierarchy.pdf"> 
-        (pdf)</A><BR></SPAN><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>IEEE 
-        Transactions on Knowledge and Data Engineering</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>    
-           (<I>TKDE</I>)</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, to  
-             appear.</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Rong-Hua Li</SPAN></B><SPAN lang="EN-US" 
-        style="font-size: 10pt;">, </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jeffrey 
-        Xu Yu</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, Rui Mao, and 
-        Tan Jin<BR></SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Recursive 
-        Stratified Sampling: A New Framework for       Query Evaluation on 
-        Uncertain Graphs</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"><A 
-        href="https://ronghuali.github.io/paper/tkdesampler.pdf"> 
-        (pdf)</A><BR></SPAN><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>IEEE 
-        Transactions on Knowledge and Data Engineering</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>    
-           (<I>TKDE</I>)</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, 
-        vol. 28,       no. 2, pp. 468-482, 2016.</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Rong-Hua Li</SPAN></B><SPAN lang="EN-US" 
-        style="font-size: 10pt;">, Lu Qin, </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jeffrey 
-              Xu Yu</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, and Rui 
-        Mao <BR></SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Optimal 
-        Multi-Meeting-Point Route Search</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"><A 
-        href="https://ronghuali.github.io/paper/tkderoadnet.pdf"> 
-        (pdf)</A><BR></SPAN><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>IEEE 
-        Transactions on Knowledge and Data Engineering</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>    
-           (<I>TKDE</I>)</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, vol 
-        28,       no. 3, pp. 770-784, 2016.</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><SPAN 
-        lang="EN-US" style="font-size: 10pt; mso-bidi-font-weight: bold;">Xin 
-        Huang, Hong       Cheng, <B>Rong-Hua Li</B>, Lu Qin, and Jeffrey Xu 
-        Yu<BR></SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Top-K 
-        structural       diversity search in large networks</SPAN><SPAN lang="EN-US"> 
-        (<A 
-        href="https://ronghuali.github.io/paper/15vldbjdiv.pdf">pdf</A>)<BR></SPAN><I><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>The 
-        VLDB Journal (VLDBJ), vol 24, no. 3, pp. 319-343,       
-        2015.</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style="font-size: 10pt;"> and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jeffrey 
-              Xu Yu</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"><BR>       
-        Triangle Minimization in Large Networks <A href="https://ronghuali.github.io/paper/triangle.pdf">(pdf)</A><BR><I 
-        style="mso-bidi-font-style: normal;">Knowledge and Information Systems   
-            (KAIS)</I>, vol. 45, no. 3, pp. 617-643, 2015.</SPAN><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Baichuan Li, <B style="mso-bidi-font-weight: normal;">Rong-Hua 
-        Li</B>, Irwin King, Michael R. Lyu, and Jeffrey Xu Yu<BR>       A 
-        Topic-biased User Reputation Model in Rating Systems (<A href="https://ronghuali.github.io/paper/15kaistopic.pdf">pdf</A>)<BR><I 
-        style="mso-bidi-font-style: normal;">Knowledge and Information Systems   
-            (KAIS)</I>, vol. 44, no. 3, pp. 518-607, 2015.</SPAN><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rui 
-        Mao<BR>       Efficient Core&nbsp;Maintenance in&nbsp;Large Dynamic 
-        Graphs<A href="https://ronghuali.github.io/paper/kcoretkde.pdf"> 
-        (pdf)</A><BR><I>IEEE Transactions on Knowledge and Data Engineering</I> 
-        (<I>TKDE</I>),</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"> vol. 
-        26, no. 10, pp. 2453-2465,       2014</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>. 
-        <o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu,</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"> Xin 
-        Huang, Hong Cheng, and Zechao Shang<BR>       Measuring the impact of 
-        MVC attack in large complex networks </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href="https://ronghuali.github.io/paper/mvcattack.pdf">(pdf)</A><BR><I 
-        style="mso-bidi-font-style: normal;">Information Sciences (IS)</I>,      
-         vol. 278, pp. 685-702, 2014.<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jianquan Liu, Jeffrey Xu Yu, Hanxiong Chen, </SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;">and </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Hiroyuki 
-              Kitagawa<BR>       Co-occurrence prediction in a large 
-        location-based social network <A href="https://ronghuali.github.io/paper/lbsn.pdf">(pdf)</A><BR><I>Frontiers 
-        of Computer Science (FCS)</I>, vol. 7, no. 2, pp. 185-194,       2013. 
-        <o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-        and Jeffrey Xu Yu<BR>       Scalable Diversified Ranking on Large Graphs 
-        (<A href="https://ronghuali.github.io/paper/divranktkde.pdf"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">pdf</SPAN></A>)</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;"><BR></SPAN><I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>IEEE 
-        Transactions on Knowledge and Data Engineering</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>    
-           (<I>TKDE</I>), </SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;">vol. 25,       no. 9, pp. 2133-2146, 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>2013. 
-        </SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jiyuan 
-        Lin<BR>       Evolution of cooperation in spatial traveler's dilemma 
-        game </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">(<A href="http://dx.plos.org/10.1371/journal.pone.0058597"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">Online 
-              version</SPAN></A>) </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>(<A 
-        href="https://ronghuali.github.io/paper/tdgame.pdf"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;">pdf</SPAN></A>)<BR><I>PLOS 
-        ONE</I>, (5-Year Impact Factor 4.537), 2013. <SPAN 
-        class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l1 level1 lfo2;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, Xin Huang, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Hong 
-        Cheng <BR>       A Framework of Algorithms: Computing the Bias and 
-        Prestige of Nodes in       Trust Networks</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"> (<A href="http://dx.plos.org/10.1371/journal.pone.0050843"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">Online 
-              version</SPAN></A>) (<A href="https://ronghuali.github.io/paper/plosone.pdf"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">pdf</SPAN></A>) 
-               </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><BR><I>PLOS 
-        ONE</I>, (5-Year Impact Factor 4.537), 2012.</SPAN><SPAN class="MsoHyperlink"><SPAN 
-        lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI></OL></TD></TR>
-  <TR style="mso-yfti-irow: 4;">
-    <TD style="padding: 0.75pt;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Selected 
-      </SPAN></B><B><SPAN lang="EN-US" style="font-size: 18pt;">conference 
-      papers</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-      <o:p></o:p></SPAN></P>
-      <OL type="1" start="1">
-      <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        and</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              Qiangqiang Dai, Lu Qin, Guoren Wang, Xiaokui Xiao, Jeffrey Xu Yu, Shaojie Qiao</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><BR>       Efficient Signed Clique Search in Signed Networks</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href=""><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-                </SPAN></A><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">IEEE International Conference on Data Engineering</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              (</SPAN><I><SPAN lang="EN-US" 
-        style="font-size: 10pt;">ICDE</SPAN></I><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-               </SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>)
-        2018.<SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
+                <p>
+                    Zijian Chen, <strong>Rong-Hua Li*</strong>, Hongchao Qin, Huanzhong Duan, Yanxiong Lu, Qiangqiang Dai, Guoren Wang. Filtration-Enhanced Graph Transformation, IJCAI (<strong>CCF A类会议</strong>), 2022
+                </p>
 
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        and</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-               Jiao Su, Lu Qin, Jeffrey Xu Yu, Qiangqiang Dai</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><BR>       Persistent Community Search in Temporal Networks</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href=""><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-               </SPAN></A><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">IEEE International Conference on Data Engineering</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              (</SPAN><I><SPAN lang="EN-US" 
-        style="font-size: 10pt;">ICDE</SPAN></I><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-               </SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>)
-        2018.<SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
+                <p>
+                    Gao Sen, <strong>Rong-Hua Li*</strong>, Hongchao Qin, Hongzhi Chen, Ye Yuan, Guoren Wang. Colorful h-star Core Decomposition, ICDE (<strong>CCF A类会议</strong>), 2022
+                </p>
 
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        and</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              Lu Qin, Fanghua Ye, Jeffrey Xu Yu, Xiaokui Xiao, Nong Xiao, Zibin Zheng</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><BR>       Skyline Community Search in Multi-valued Networks</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href=""><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-                </SPAN></A><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">International Conference on Management of Data</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              (</SPAN><I><SPAN lang="EN-US" 
-        style="font-size: 10pt;">SIGMOD</SPAN></I><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-               </SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>)
-        2018.<SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
+                <p>
+                    Minjia Pan, <strong>Rong-Hua Li*</strong>, Qi Zhang, Yongheng Dai, Qun Tian, Guoren Wang: Fairness-aware Maximal Clique Enumeration. ICDE，2022
+                </p>
 
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Lu       Qin, 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jeffrey 
-        Xu Yu, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rui 
-        Mao <BR></SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Efficient and 
-              Progressive Group Steiner Tree Search</SPAN><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href="https://ronghuali.github.io/paper/sigmod2016gst.pdf"> <SPAN 
-        style="mso-fareast-font-family: SimSun; mso-fareast-theme-font: minor-fareast;">(pdf)</SPAN></A><BR><I 
-        style="mso-bidi-font-style: normal;">International Conference on 
-        </I></SPAN><I style="mso-bidi-font-style: normal;"><SPAN lang="EN-US" 
-        style="font-size: 10pt;">Management of Data</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>&nbsp;(</SPAN><I><SPAN 
-        lang="EN-US" style="font-size: 10pt;">SIGMOD</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>)&nbsp;201</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;">6</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>.</SPAN><SPAN 
-        class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Lu       Qin, 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jeffrey 
-        Xu Yu, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rui 
-        Mao <BR></SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Influential 
-        Community       Search in Large Networks</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href="https://ronghuali.github.io/paper/vldb15influ.pdf"> <SPAN 
-        style="mso-fareast-font-family: SimSun; mso-fareast-theme-font: minor-fareast;">(pdf)</SPAN></A><BR><I 
-        style="mso-bidi-font-style: normal;">International Conference on 
-        </I></SPAN><I style="mso-bidi-font-style: normal;"><SPAN lang="EN-US" 
-        style="font-size: 10pt;">Very Large Data Bases</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>&nbsp;(</SPAN><I><SPAN 
-        lang="EN-US" style="font-size: 10pt;">VLDB</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>)&nbsp;201</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;">5</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>.</SPAN><SPAN 
-        class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Lu 
-        Qin</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">Rui Mao</SPAN><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and Tan 
-        Jin</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-        <BR></SPAN><SPAN lang="EN-US" style="font-size: 10pt;">On Random Walk 
-        Based       Graph Sampling<A href="https://ronghuali.github.io/paper/icde15rw.pdf"> 
-        (pdf)</A></SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><BR><I 
-        style="mso-bidi-font-style: normal;">International Conference on Data    
-           Engineering</I>&nbsp;(<I>ICDE</I>)&nbsp;201</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;">5</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>.<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Lu 
-              Qin, <B style="mso-bidi-font-weight: normal;">Rong-Hua Li</B>, 
-        Lijun       Chang, and Chengqi Zhang</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"><BR></SPAN><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Locally 
-        Densest Subgraph Discovery</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>(<A 
-        href="https://ronghuali.github.io/paper/kdd15densegraph.pdf">pdf</A>)</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;"><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>International 
-              Conference on Knowledge Discovery and Data Mining 
-        (KDD)</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              2015.<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Taotao 
-              Cai, <B style="mso-bidi-font-weight: normal;">Rong-Hua 
-        Li</B></SPAN><B style="mso-bidi-font-weight: normal;"><SUP><SPAN lang="EN-US" 
-        style="font-size: 10pt;">*</SPAN></SUP></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-              Jeffrey Xu Yu, Rui Mao, and Yadi Cai </SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><BR></SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Efficient 
-        Algorithms for Distance-Based       Representative Skyline Computation 
-        in 2D Space</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>(<A 
-        href="https://ronghuali.github.io/paper/15apwebskyline.pdf">pdf</A>)</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;"><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>17th 
-              Asia-PacificWeb Conference (APWeb)</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>    
-           2015.<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, Xin Huang</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, 
-        and </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Hong 
-        Cheng <BR>       Random-walk domination in large graphs<A href="https://ronghuali.github.io/paper/rwdom.pdf"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-        (pdf)</SPAN></A><BR><I 
-        style="mso-bidi-font-style: normal;">International Conference on Data    
-           Engineering</I>&nbsp;(<I>ICDE</I>)&nbsp;2014.</SPAN><SPAN class="MsoHyperlink"><SPAN 
-        lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, Rui Mao, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Tan 
-        Jin<BR>       Efficient and Accurate Query Evaluation on Uncertain 
-        Graphs via       Recursive Stratified Sampling</SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><A href="https://ronghuali.github.io/paper/uncertaingraph.pdf"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-        </SPAN><SPAN style='color: windowtext; text-decoration: none; mso-fareast-font-family: "Times New Roman"; text-underline: none;'>(pdf)</SPAN></A></SPAN><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><BR><I 
-        style="mso-bidi-font-style: normal;">International Conference on Data    
-           Engineering</I>&nbsp;(<I>ICDE</I>)&nbsp;2014.</SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><SPAN 
-        lang="EN-US" style="font-size: 10pt; mso-bidi-font-weight: bold;">Xin 
-        Huang, Hong       Cheng, <B>Rong-Hua Li</B>, Lu Qin, and Jeffrey Xu 
-        Yu<BR>       Top-K Structural Diversity Search in Large 
-        Networks</SPAN><SPAN lang="EN-US"> (<A href="https://ronghuali.github.io/paper/vldb13strudiv.pdf">pdf</A>)<BR></SPAN><I 
-        style="mso-bidi-font-style: normal;"><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>International 
-              Conference on </SPAN></I><I 
-        style="mso-bidi-font-style: normal;"><SPAN lang="EN-US" style="font-size: 10pt;">Very 
-        Large Data Bases</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>&nbsp;(</SPAN><I><SPAN 
-        lang="EN-US" style="font-size: 10pt;">VLDB</SPAN></I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>)&nbsp;201</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;">3.</SPAN><SPAN class="MsoHyperlink"><SPAN 
-        lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, Xin Huang, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Hong 
-        Cheng<BR>       Robust Reputation-Based Ranking on Bipartite Rating 
-        Networks (<A 
-        href="https://ronghuali.github.io/paper/sdmrating.pdf"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;">pdf</SPAN></A>)<BR><I>SIAM 
-        International Conference on Data Mining</I>(<I>SDM</I>),</SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;"> </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>2012. 
-               <SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, Xin Huang, Hong Cheng</SPAN><SPAN lang="EN-US" style="font-size: 10pt;">, 
-        and Zechao Shang<BR>       Measuring robustness of complex networks 
-        under MVC attack </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href="https://ronghuali.github.io/paper/cikmmvc.pdf"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;">(pdf)</SPAN></A></SPAN><SPAN 
-        lang="EN-US" style="font-size: 10pt;"><BR></SPAN><I><SPAN lang="EN-US" 
-        style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>ACM 
-        International Conference on Information and       Knowledge 
-        Management</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>(<I>CIKM 
-        </I>),</SPAN><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        2012.</SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style='color: windowtext; font-size: 10pt; text-decoration: none; mso-fareast-font-family: "Times New Roman"; text-underline: none;'><o:p></o:p></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="margin-bottom: 12pt; mso-margin-top-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style="font-size: 10pt;"> 
-        and</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              Jeffrey Xu Yu, </SPAN><SPAN lang="EN-US" 
-        style="font-size: 10pt;"><BR>       Scalable diversified ranking on 
-        large graphs</SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'><A 
-        href="https://ronghuali.github.io/paper/icdmdivrank.pdf"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-        (pdf)        </SPAN></A><BR></SPAN><I style="mso-bidi-font-style: normal;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">IEEE International Conference on 
-        Data Mining</SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-              (</SPAN><I><SPAN lang="EN-US" 
-        style="font-size: 10pt;">ICDM</SPAN></I><I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-               </SPAN></I><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>), 
-        2011.<SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
+                <p>
+                     Qi Zhang, <strong>Rong-Hua Li*</strong>, Minjia Pan, Yongheng Dai, Guoren Wang, Ye Yuan: Efficient Top-k Ego-Betweenness Search. ICDE，2022
+                </p>
 
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l0 level1 lfo3;"><B><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Rong-Hua 
-              Li</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>, 
-        Jeffrey Xu Yu, </SPAN><SPAN lang="EN-US" style="font-size: 10pt;">and 
-        </SPAN><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Jianquan 
-        Liu <BR>       Link prediction: the power of maximal entropy random walk 
-        (<A href="https://ronghuali.github.io/paper/cikmlink.pdf"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">pdf</SPAN></A>) 
-               <BR><I>ACM International Conference on Information and Knowledge 
-        Management</I>(<I>CIKM        </I>), 2011. </SPAN><SPAN class="MsoHyperlink"><SPAN 
-        lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI>
+                <p>
+                    Xiaowei Ye, <strong>Rong-Hua Li*</strong>, Qiangqiang Dai, Hongzhi Chen, Guoren Wang: Lightning Fast and Space Efficient k-clique Counting. WWW，2022
+                </p>
 
-        </OL></TD></TR>
+                <p>
+                    Qiangqiang Dai, <strong>Rong-Hua Li*</strong>, Meihao Liao, Hongzhi Chen, Guoren Wang: Fast Maximal Clique Enumeration on Uncertain Graphs: A Pivot-based Approach. SIGMOD，2022
+                </p>
 
+                <p>
+                    Meihao Liao, <strong>Rong-Hua Li*</strong>, Qiangqiang Dai, Guoren Wang: Efficient Personalized PageRank Computation: A Spanning Forests Sampling Based Approach. SIGMOD，2022
+                </p>
 
-  <TR style="mso-yfti-irow: 5;">
-    <TD width="99%" style="padding: 0.75pt; width: 99.6%;">
-      <DIV align="center" class="MsoNormal" style="text-align: center;"><SPAN 
-      class="MsoHyperlink"><SPAN lang="EN-US" style='color: windowtext; font-size: 10pt; text-decoration: none; mso-fareast-font-family: "Times New Roman"; text-underline: none;'>
-      <HR width="100%" size="2" align="center">
-      </SPAN></SPAN></DIV>
-      <P class="MsoNormal"><SPAN lang="EN-US"><o:p>&nbsp;</o:p></SPAN></P></TD></TR>
-  <TR style="mso-yfti-irow: 6;">
-    <TD style="padding: 0cm;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Educational 
-      experience </SPAN></B><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></P>
-      <P><SPAN lang="EN-US" 
-      style="font-size: 10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-      2010.8-2013.8, PhD degree, Chinese University of Hong Kong, Hong Kong, 
-      China.  Advisor: Professor <A href="http://www.se.cuhk.edu.hk/people/yu.html">Jeffrey 
-       Xu Yu</A></SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></P>
-      <P><SPAN lang="EN-US" 
-      style="font-size: 10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-      2007.9-2010.7, Master degree, South China University of Technology, China. 
-       Advisor: Professor Guoqiang Han<SPAN class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></P>
-      <P><SPAN lang="EN-US" 
-      style="font-size: 10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-      2003.9-2007.7, Bachelor degree, Jiangxi Normal University, China<SPAN 
-      class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></P></TD></TR>
-  <TR style="mso-yfti-irow: 7;">
-    <TD width="99%" style="padding: 0.75pt; width: 99.6%;">
-      <P class="MsoNormal"><SPAN lang="EN-US" 
-      style="font-size: 10pt;"><o:p>&nbsp;</o:p></SPAN></P></TD></TR>
-  <TR style="mso-yfti-irow: 8;">
-    <TD style="padding: 0.75pt;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Research 
-      &amp; Work Experience</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-      </SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></P>
-      <UL type="disc">
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l2 level1 lfo4;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>2013.9-present, 
-              Assistant Professor, College of&nbsp;Computer Science&nbsp;and 
-        Software       Engineering, Shenzhen University<SPAN class="MsoHyperlink"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l2 level1 lfo4;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>2010.8-2013.8, 
-              Research Assistant, Working with Professor <A href="http://www.se.cuhk.edu.hk/people/yu.html"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">Jeffrey 
-        Xu Yu</SPAN></A>,       Department of Systems Engineering and 
-        Engineering Management, The       Chinese University of Hong Kong<SPAN 
-        class="MsoHyperlink"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l2 level1 lfo4;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>2009.7-2010.1, 
-              Research Assistant, Working with Professor<A href="http://www4.comp.polyu.edu.hk/~gama/new/research_area.htm"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"> 
-              George Baciu</SPAN></A>, Department of Computing, Hong Kong 
-        Polytechnic       University</SPAN><SPAN class="MsoHyperlink"><SPAN 
-        lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI></UL></TD></TR>
-  <TR style="mso-yfti-irow: 9;">
-    <TD style="padding: 0.75pt;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Teaching 
-      Experience</SPAN></B><SPAN lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-      </SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></P>
-      <UL type="disc">
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l4 level1 lfo5;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Parallel Algorithms, 2015, 2016 
-        (spring),       Shenzhen University<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l4 level1 lfo5;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Information switching technology, 
-        2013, 2014       (fall), Shenzhen University<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l4 level1 lfo5;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Discrete mathematics, 2014 
-        (spring), Shenzhen       University<o:p></o:p></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l4 level1 lfo5;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Multimedia and applications, 2014, 
-        2015       (spring), Shenzhen University</SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l4 level1 lfo5;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;">Advanced databases, 2015 (fall), 
-        Shenzhen       University</SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l4 level1 lfo5;"><SPAN 
-        lang="EN-US" style="font-size: 10pt;"><A href="http://www1.se.cuhk.edu.hk/~rhli/community/community.html">An 
-              introduction to community search algorithms</A>, 2016 (spring), 
-        Shenzhen       University</SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" 
-        style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI></UL></TD></TR>
-  <TR style="mso-yfti-irow: 10;">
-    <TD width="99%" style="padding: 0.75pt; width: 99.6%;">
-      <DIV align="center" class="MsoNormal" style="text-align: center;"><SPAN 
-      class="MsoHyperlink"><SPAN lang="EN-US" style='color: windowtext; font-size: 10pt; text-decoration: none; mso-fareast-font-family: "Times New Roman"; text-underline: none;'>
-      <HR width="100%" size="2" align="center">
-      </SPAN></SPAN></DIV></TD></TR>
-  <TR style="mso-yfti-irow: 11;">
-    <TD style="padding: 0.75pt;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Services</SPAN></B><SPAN 
-      lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-      </SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></P>
-      <P class="MsoNormal" style="margin-left: 36pt; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;"><B><SPAN 
-      lang="EN-US">PC member</SPAN></B><SPAN lang="EN-US">:  WWW 2016, NDBC 
-      2016</SPAN></P>
-      <P class="MsoNormal" style="margin-left: 36pt; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;"><B><SPAN 
-      lang="EN-US">Reviewer for journals</SPAN></B><SPAN lang="EN-US">: ACM 
-      TODS, IEEE TKDE, Journal of Cooperative Information Systems,  WWW Journal, 
-      Neural Networks</SPAN></P>
-      <P class="MsoNormal" style="margin-left: 36pt; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;"><B><SPAN 
-      lang="EN-US">Publicity Chair</SPAN></B><SPAN lang="EN-US">: NDBC 
-      2016</SPAN></P></TD></TR>
-  <TR style="mso-yfti-irow: 12;">
-    <TD style="padding: 0.75pt;">
-      <P class="MsoNormal"><B><SPAN lang="EN-US" style='font-size: 18pt; mso-fareast-font-family: "Times New Roman";'>Links</SPAN></B><SPAN 
-      lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'> 
-      </SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></P>
-      <UL type="disc">
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l3 level1 lfo6;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Hobbies: 
-              Go (chess), Reading, Moive, Music<SPAN class="MsoHyperlink"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></SPAN></LI>
-        <LI class="MsoNormal" style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; tab-stops: list 36.0pt; mso-list: l3 level1 lfo6;"><SPAN 
-        lang="EN-US" style='font-size: 10pt; mso-fareast-font-family: "Times New Roman";'>Friends: 
-               <A href="http://www.uts.edu.au/staff/lu.qin"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;">Lu 
-        Qin</SPAN></A>, <A href="http://www.se.cuhk.edu.hk/~ljchang/"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">Lijun 
-        Chang</SPAN></A>, <A href="http://www.se.cuhk.edu.hk/~yyzhu/"><SPAN 
-        style="color: windowtext; text-decoration: none; text-underline: none;">Yuanyuan 
-        Zhu</SPAN></A>, <A href="http://www.se.cuhk.edu.hk/~mqiao/"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;">Miao 
-        Qiao</SPAN></A>, <A 
-        href="http://www.dblab.is.tsukuba.ac.jp/~ljq/blog/"><SPAN style="color: windowtext; text-decoration: none; text-underline: none;">Jianquan 
-              Liu</SPAN></A> </SPAN><SPAN class="MsoHyperlink"><SPAN lang="EN-US" 
-        style="color: windowtext; text-decoration: none; text-underline: none;"><o:p></o:p></SPAN></SPAN></LI></UL></TD></TR>
+                <p>
+                    Qi Zhang, <strong>Rong-Hua Li</strong>, Hongchao Qin, Guoren Wang, Zhiwei Zhang, Ye Yuan. Stable Subgraph Isomorphism Search in Temporal Networks. IEEE Transactions on Knowledge and Data Engineering  (<strong>CCF A类期刊</strong>), (已接收)
+                </p>
+
+                <p>
+                    Bohua Yang, Dong Wen, Lu Qin, Ying Zhang, Lijun Chang, <strong>Rong-Hua Li</strong>. Computing K-Cores in Large Uncertain Graphs: An Index-based Optimal Approach. IEEE Transactions on Knowledge and Data Engineering, (已接收)
+                </p>
+
+                <p>
+                    Qiangqiang Dai, <strong>Rong-Hua Li*</strong>, Guoren Wang, Rui Mao, Zhiwei Zhang, Ye Yuan. Core Decomposition on Uncertain Graphs Revisited. IEEE Transactions on Knowledge and Data Engineering, (已接收)
+                </p>
+
+                <p>
+                    Longxu Sun, Xin Huang, <strong>Rong-Hua Li</strong>, Byron Choi, and Jianliang Xu. Index-based Intimate-Core Community Search in Large Weighted Graphs. IEEE Transactions on Knowledge and Data Engineering, (已接收)
+                </p>
+
+                <p>
+                    Hongchao Qin, <strong>Rong-Hua Li*</strong>, Ye Yuan, Guoren Wang, Weihua Yang, and Lu Qin. Periodic Communities Mining in Temporal Networks: Concepts and Algorithms.  IEEE Transactions on Knowledge and Data Engineering, (已接收)
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Qiushuo Song, Xiaokui Xiao, Lu Qin, Guoren Wang, Jeffrey Xu Yu, and Rui Mao. I/O-Efficient Algorithms for Degeneracy Computation on Massive Networks. IEEE Transactions on Knowledge and Data Engineering, (已接收)&nbsp;&nbsp;&nbsp;
+                </p>
+
+                <p>
+                    Taotao Cai, Jianxin Li, Ajmal Mian, <strong>Rong-Hua Li</strong>, Timos Sellis, and Jeffrey Xu Yu: Target-aware Holistic Influence Maximization in Spatial Social Networks.IEEE Transactions on Knowledge and Data Engineering, (已接收)&nbsp;&nbsp;&nbsp;
+                </p>
+
+                <p>
+                    Hongchao Qin, <strong>Rong-Hua Li*</strong>, Guoren Wang, Xin Huang, Ye Yuan, and Jeffrey Xu Yu: Mining Stable Communities in Temporal Networks by Density-based Clustering. IEEE Transactions on Big Data, (已接收)&nbsp;&nbsp;&nbsp;
+
+                <p>
+                    Lianpeng Qiao, <strong>Rong-Hua Li*</strong>, Zhiwei Zhang, Guoren Wang, Ximing Li, and Ye Yuan. Maximal Quasi-Cliques Mining in Uncertain Graphs. IEEE Transactions on Big Data, (已接收)&nbsp;&nbsp;&nbsp;
+                </p>
+
+                <p>
+                    Longlong Lin, Pingpeng Yuan, <strong>Rong-Hua Li</strong>, and Hai Jin. Mining Diversified Top-r Lasting Cohesive Subgraphs on Temporal Networks. IEEE Transactions on Big Data, (已接收)&nbsp;&nbsp;&nbsp;
+                </p>
+
+                <p>
+                    Longlong Lin, Pingpeng Yuan，<strong>Rong-Hua Li</strong>, Jifei Wang，Ling Liu，Hai Jin. Mining Stable Quasi-Cliques on Temporal Networks. IEEE Trans. Systems, Man, and Cybernetics: Systems, (已接收)&nbsp;&nbsp;&nbsp;
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Qiangqiang Dai, Lu Qin, Guoren Wang, Xiaokui Xiao, Jeffrey Xu Yu, Shaojie Qiao. Signed Clique Search in Signed Networks: Concepts and Algorithms, IEEE Trans. Knowl. Data Eng. 33(2): 710-727 (2021)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Signed Clique Search in Signed Networks Concepts and Algorithms.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Shaojie Qiao , Nan Han, Yunjun Gao, <strong>Rong-Hua Li</strong>, Jianbin Huang, Heli Sun, and Xindong Wu: Dynamic Community Evolution Analysis Framework for Large-scale Complex Networks Based on Strong and Weak Events. . IEEE Trans. Syst. Man Cybern. Syst. 51(10): 6229-6243, 2021&nbsp;&nbsp;&nbsp;<a href="#">(pdf)</a>
+                </p>
+
+                <p>
+                    Qiangqiang Dai, <strong>Rong-Hua Li*</strong>, Lu Qin, Guoren Wang, Weihua Yang, Zhiwei Zhang, Ye Yuan: Scaling Up Distance-generalized Core Decomposition. CIKM 2021: 312-321&nbsp;&nbsp;&nbsp;<a href="#">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Sen Gao, Lu Qin, Guoren Wang, Weihua Yang, Jeffrey Xu Yu. Ordering Heuristics for k-clique Listing, VLDB 2020.&nbsp;&nbsp;&nbsp;<a href="#">(pdf)</a>
+                </p>
+
+                <p>
+                    Qi Zhang, <strong>Rong-Hua Li</strong>, Qixuan Yang, Guoren Wang, Lu Qin: Efficient Top-k Edge Structural Diversity Search. ICDE 2020: 205-216&nbsp;&nbsp;&nbsp;<a href="#">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Lu Qin, Fanghua Ye, Guoren Wang, Jeffrey Xu Yu, Xiaokui Xiao, Nong Xiao and Zibin Zheng: Finding skyline communities in multi-valued networks. VLDB Journal 29(6): 1407-1432, 2020. &nbsp;&nbsp;&nbsp;<a href="#">(pdf)</a>
+                </p>
+                
+                    
+                <p>
+                    Fanghua Ye, Chuan Chen, Zibin Zheng, <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu. Discrete Overlapping Community Detection with Pseudo Supervision, ICDM 2019.&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Discrete Overlapping Community Detection with Pseudo Supervision.pdf">(pdf)</a>
+                </p>
+                <p>
+                    Xiaxia Guan, Shurong Zhang, <strong>Rong-Hua Li</strong>, Lin Chen, Weihua Yang: Anti-k-labeling of graphs. Applied Mathematics and Computation 363 (2019).&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Anti-k-labeling of graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Lu Miao, Shurong Zhang, <strong>Rong-Hua Li</strong>, Weihua Yang. Structure fault tolerance of k-ary n-cube networks. Theoretical Computer Science, 2019.&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Structure fault tolerance of k-ary n-cube networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Renchi Yang, Xiaokui Xiao, Zhewei Wei, Sourav S. Bhowmick, Jun Zhao, <strong>Rong-Hua Li</strong>. Efficient Estimation of Heat Kernel PageRank for Local Clustering. SIGMOD Conference 2019: 1339-1356.&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Efficient Estimation of Heat Kernel PageRank for Local Clustering.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Yu-Xuan Qiu, <strong>Rong-Hua Li*</strong>,Jianxin Li, Shaojie Qiao, Guoren Wang, Jeffrey Xu Yu, Rui Mao. Efficient Structural Clustering on Probabilistic Graphs, IEEE Transactions on Knowledge and Data Engineering. 31(10): 1954-1968 (2019)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Efficient Structural Clustering on Probabilistic Graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Xi Xiong, Shaojie Qiao, Yuanyuan Li, Haiqing Zhang, Ping Huang, Nan Han, <strong>Rong-Hua Li</strong>. ADPDF: A Hybrid Attribute Discrimination Method for Psychometric Data With Fuzziness.IEEE Trans. Systems, Man, and Cybernetics: Systems 49(1): 265-278 (2019)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/A Hybrid Attribute Discrimination Method for Psychometric Data With Fuzziness.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Bohua Yang, Dong Wen, Lu Qin, Ying Zhang, Lijun Chang, <strong>Rong-Hua Li</strong>. Index-Based Optimal Algorithm for Computing K-Cores in Large Uncertain Graphs. ICDE 2019: 64-75(<span style="color:rgb(255, 0, 0)">1 of 8 excellent paper, invited to TKDE</span>)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Index-Based Optimal Algorithm for Computing K-Cores in Large Uncertain Graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Qiangqiang Dai, Guoren Wang, Zhong Ming, Lu Qin, Jeffrey Xu Yu. Improved Algorithms for Maximal Clique Search in Uncertain Networks. ICDE 2019: 1178-1189&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Improved Algorithms for Maximal Clique Search in Uncertain Networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Hongchao Qin, <strong>Rong-Hua Li</strong>, Guoren Wang, Lu Qin, Yurong Cheng, Ye Yuan. Mining Periodic Cliques in Temporal Networks. ICDE 2019: 1130-1141&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Mining Periodic Cliques in Temporal Networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Qiangqiang Dai, Lu Qin, Guoren Wang, Xiaokui Xiao, Jeffrey Xu Yu, Shaojie Qiao. Efficient Signed Clique Search in Signed Networks. ICDE 2018: 245-256.(<span style="color:rgb(255, 0, 0)">1 of 8 excellent paper, invited to TKDE</span>)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Efficient Signed Clique Search in Signed Networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jiao Su, Lu Qin, Jeffrey Xu Yu, Qiangqiang Dai. Persistent Community Search in Temporal Networks. ICDE 2018: 797-808&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Persistent Community Search in Temporal Networks.pdf">(pdf)</a>&nbsp;&nbsp;,&nbsp;&nbsp;<a href="https://github.com/BoleynSu/tcore">(code)</a>&nbsp;&nbsp;,&nbsp;&nbsp;<a href="./Rong-Hua Li_files/temperoal_K_CORE.cpp">(A simpler version for chinese students)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Lu Qin, Fanghua Ye, Jeffrey Xu Yu, Xiaokui Xiao, Nong Xiao, Zibin Zheng. Skyline Community Search in Multi-valued Networks. SIGMOD Conference 2018: 457-472&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Skyline Community Search in Multi-valued Networks.pdf">(pdf)</a>&nbsp;&nbsp;,&nbsp;&nbsp;<a href="https://github.com/smartyfh/MAIC">(code)</a>
+                </p>
+
+                <p>
+                    Fei Chen, Donghong Wang, <strong>Rong-Hua Li</strong>, Jianyong Chen, Zhong Ming, Alex X. Liu, Huayi Duan, Cong Wang, Jing Qin. Secure Hashing-Based Verifiable Pattern Matching. IEEE Trans. Information Forensics and Security 13(11): 2677-2690 (2018)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Secure Hashing-Based Verifiable Pattern Matching.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Shaojie Qiao, Nan Han, Junfeng Wang, <strong>Rong-Hua Li</strong>, Louis Alberto Gutierrez, Xindong Wu. Predicting Long-Term Trajectories of Connected Vehicles via the Prefix-Projection Technique. IEEE Trans. Intelligent Transportation Systems 19(7): 2305-2315 (2018)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Predicting Long-Term Trajectories of Connected Vehicles via the Prefix-Projection Technique.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Shaojie Qiao, Nan Han, Yunjun Gao, <strong> Rong-Hua Li</strong>, Jianbin Huang, Jun Guo, Louis Alberto Gutierrez, Xindong Wu. A Fast Parallel Community Discovery Model on Complex Networks through Approximate Optimization. IEEE Transactions on Knowledge and Data Engineering 30(9): 1638-1651 (2018)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/A Fast Parallel Community Discovery Model on Complex Networks through Approximate Optimization.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Lu Qin, Jeffrey Xu Yu, Rui Mao. Finding influential communities in massive networks. VLDB J. 26(6): 751-776 (2017)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Finding influential communities in massive networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu, Rui Mao, Tan Jin. Recursive Stratified Sampling: A New Framework for Query Evaluation on Uncertain Graphs. IEEE Transactions on Knowledge and Data Engineering 28(2): 468-482 (2016)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/A New Framework for Query Evaluation on Uncertain Graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Lu Qin, Jeffrey Xu Yu, Rui Mao. Optimal Multi-Meeting-Point Route Search. IEEE Transactions on Knowledge and Data Engineering 28(3): 770-784 (2016)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Optimal Multi-Meeting-Point Route Search.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Can Lu, Jeffrey Xu Yu, <strong>Rong-Hua Li*</strong>, Hao Wei. Exploring Hierarchies in Online Social Networks. IEEE Transactions on Knowledge and Data Engineering 28(8): 2086-2100 (2016)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Exploring Hierarchies in Online Social Networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Lu Qin, Jeffrey Xu Yu, Rui Mao. Efficient and Progressive Group Steiner Tree Search. SIGMOD Conference 2016: 91-106&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Efficient and Progressive Group Steiner Tree Search.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Lu Qin, Jeffrey Xu Yu, Rui Mao. Influential Community Search in Large Networks. PVLDB 8(5): 509-520 (2015)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Influential Community Search in Large Networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Xin Huang, Hong Cheng, <strong>Rong-Hua Li</strong>, Lu Qin, Jeffrey Xu Yu. Top-K structural diversity search in large networks. VLDB Journal 24(3): 319-343 (2015)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Top-K structural diversity search in large networks(2015).pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu, Lu Qin, Rui Mao, Tan Jin. On random walk based graph sampling. ICDE 2015: 927-938&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/On random walk based graph sampling.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Lu Qin, <strong>Rong-Hua Li</strong>, Lijun Chang, Chengqi Zhang. Locally Densest Subgraph Discovery. KDD 2015: 965-974&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Locally Densest Subgraph Discovery.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu, Rui Mao. Efficient Core Maintenance in Large Dynamic Graphs. IEEE Transactions on Knowledge and Data Engineering 26(10): 2453-2465 (2014)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Efficient Core Maintenance in Large Dynamic Graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong> Jeffrey Xu Yu, Xin Huang, Hong Cheng. Random-walk domination in large graphs. ICDE 2014: 736-747&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Random-walk domination in large graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu, Rui Mao, Tan Jin. Efficient and accurate query evaluation on uncertain graphs via recursive stratified sampling. ICDE 2014: 892-903&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Efficient and accurate query evaluation on uncertain graphs via recursive stratified sampling.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    Xin Huang, Hong Cheng, <strong>Rong-Hua Li</strong>, Lu Qin, Jeffrey Xu Yu. Top-K Structural Diversity Search in Large Networks. PVLDB 6(13): 1618-1629 (2013)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Top-K Structural Diversity Search in Large Networks(2013).pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu. Scalable Diversified Ranking on Large Graphs. IEEE Transactions on Knowledge and Data Engineering 25(9): 2133-2146 (2013)&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Scalable Diversified Ranking on Large Graphs.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu, Xin Huang, Hong Cheng. Robust Reputation-Based Ranking on Bipartite Rating Networks. SDM 2012: 612-623&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Robust Reputation-Based Ranking on Bipartite Rating Networks.pdf">(pdf)</a>
+                </p>
+
+                <p>
+                    <strong>Rong-Hua Li</strong>, Jeffrey Xu Yu, Jianquan Liu. Link prediction: the power of maximal entropy random walk. CIKM 2011: 1147-1156&nbsp;&nbsp;&nbsp;<a href="./PaperFiles/Link prediction the power of maximal entropy random walk.pdf">(pdf)</a>
+                </p>
+            </div>
+
+      </TD>
+
+  </TR>
+  
   <TR style="mso-yfti-irow: 13;">
     <TD width="99%" style="padding: 0.75pt; width: 99.6%;">
       <P align="center" class="MsoNormal" style="text-align: center;"><SPAN 
