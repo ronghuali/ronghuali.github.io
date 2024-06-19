@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>师生合影</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	imgZoomInit()//模块初始化
+})
+
+
+/*
+* 图片放大展示
+
+*/
+function imgZoomInit(){
+	$('.piclist li.pic').append(function(){		
+		ht = $(this).find('.in').html();
+		return "<div class='original'>"+ht+"</div>";
+	});
+	
+	$(".piclist li.pic .in img").each(function(i){
+		var img = $(this);
+		var realWidth ;//原始宽度
+		var realHeight ;//原始高度
+		var vs ;//图片宽高比
+		
+		realWidth = this.width;
+		realHeight = this.height;
+		vs = realWidth/realHeight;
+
+		//缩略图比例约等于1.34
+		if(vs>=1.34){//横图则固定高度
+			$(img).css("width","auto").css("height","172px").css("marginLeft",95-(71*realWidth/realHeight)+"px");
+		}
+		else{//竖图则固定宽度
+			$(img).css("width","230px").css("height","auto").css("marginTop",71-(95*realHeight/realWidth)+"px");
+		}
+		$(img).parent().parent().parent().find('.original .imgdiv').css('overflow' , 'hidden');
+		//图片放大水平垂直居中显示
+		if(vs>=1){//横图或正方形
+			$(img).parent().parent().parent().find('.original img').height(260);
+			$(img).parent().parent().parent().find('.original img').width("auto");
+			$(img).parent().parent().parent().find('.original').css({
+				//此处需结合实际情况计算 左偏移：.original实际宽度的二分之一
+				marginLeft: function(){
+					return -(80*realWidth/realHeight)-6;
+				},
+				left:'10%'
+			})
+		}else{//竖图
+			$(img).parent().parent().parent().find('.original img').width(260);
+			$(img).parent().parent().parent().find('.original img').height("auto");
+			$(img).parent().parent().parent().find('.original').css({
+				//此处需结合实际情况计算 上偏移：.original实际高度的二分之一
+				marginTop: function(){
+					return -(130*realHeight/realWidth)-36;
+				},
+				top:'50%'
+			});
+		}		
+	});
+
+	
+	$('.piclist li.pic').hover(function(){
+		$(this).addClass('on');
+	},function(){
+		$(this).removeClass('on');	
+	})
+	
+	$(".piclist ul li:nth-child(4n)").addClass('r');
+}
+</script>
+<script type="text/javascript">
+$(function () {
+	var imgsObj = $('.original img');//需要放大的图像
+    if(imgsObj){
+		$.each(imgsObj,function(){
+			$(this).click(function(){				
+				var currImg = $(this);
+				coverLayer(1);
+				var tempContainer = $('<div class=tempContainer></div>');//图片容器
+				with(tempContainer){//width方法等同于$(this)
+					appendTo("body");
+					var windowWidth=$(window).width();
+					var windowHeight=$(window).height();
+					//获取原始图片宽度、高度
+					var orignImg = new Image();
+					var thumImgPathArr = new Array();
+					var thumImgPath = currImg.attr("src");
+					thumImgPathArr = thumImgPath.split('/');
+					var origImgPath = new String();
+					for(var i = 0; i < thumImgPathArr.length - 1; i++){
+						origImgPath += thumImgPathArr[i] + "/";
+					}
+					origImgPath += "original/" + thumImgPathArr[thumImgPathArr.length - 1];
+					orignImg.src = origImgPath;
+					
+					orignImg.onload = function(){
+						var currImgWidth= orignImg.width;
+						var currImgHeight = orignImg.height;
+						if(currImgWidth<windowWidth){//为了让图片不失真，当图片宽度较小的时候，保留原图
+							if(currImgHeight<windowHeight){							
+								var topHeight=(windowHeight-currImgHeight)/2;
+								if(topHeight>35){/*此处为了使图片高度上居中显示在整个手机屏幕中：因为在android,ios的微信中会有一个title导航，35为title导航的高度*/
+									topHeight=topHeight-35;
+									css('top',topHeight);
+								}else{
+									css('top',0);
+								}
+								html('<img border=0 src=' + origImgPath + '>');
+							}else{
+								css('top',0);
+								html('<img border=0 src=' + origImgPath + ' height='+windowHeight+'>');
+							}
+						}else{
+							var currImgChangeHeight=(currImgHeight*windowWidth)/currImgWidth;
+							if(currImgChangeHeight<windowHeight){
+								var topHeight=(windowHeight-currImgChangeHeight)/2;
+								if(topHeight>35){
+									topHeight=topHeight-35;
+									css('top',topHeight);
+								}else{
+									css('top',0);
+								}
+								html('<img border=0 src=' + origImgPath + ' width='+windowWidth+';>');
+							}else{
+								css('top',0);
+								html('<img border=0 src=' + origImgPath + ' width='+windowWidth+'; height='+windowHeight+'>');
+							}
+						}
+					}
+				}
+				tempContainer.click(function(){
+					$(this).remove();
+					coverLayer(0);
+				});
+
+				$('.over').click(function(){
+					$('.tempContainer').remove();
+					coverLayer(0);
+				});
+			});
+		});
+    }
+})
+    //使用禁用蒙层效果
+function coverLayer(tag){
+	with($('.over')){
+		if(tag==1){
+			css('height',$(document).height());
+			css('display','block');
+			css('opacity',0.5);
+			css("background-color","#000");
+		}
+		else{
+			css('display','none');
+		}
+	}
+}
+</script>
+<style>
+h2 {
+    text-align: center
+}
+.piclist{
+	width:100%;
+	text-align:center; 
+}
+.piclist ul{
+	display:inline-block;
+	list-style:none;
+	padding:0px;
+}
+.piclist li {
+	display:inline-block;
+    text-align: center;
+    z-index: 0;
+    position: relative;
+    margin: 0 10px 10px 0;
+    width: 240px;
+    height: 180px;
+}
+.piclist li .in img {
+    *width: 240px;
+    *height: auto
+}
+
+.piclist li .in {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 240px;
+}
+
+.piclist li .in .imgdiv {
+    display: block;
+    width: 240px;
+    height: 172px;
+    margin: 0 auto;
+    margin-top: 4px;
+    overflow: hidden;
+}
+.piclist li.pic .original {
+    display: none;
+    padding: 5px;
+    border: 1px solid #d13a3e;
+    position: absolute;
+    text-align: center;
+    left: -16px;
+    top: -59px;
+    background: #fff;
+}
+
+.piclist li .original img {
+    *height: 250px;
+    *width: auto
+}
+
+.piclist li.on {
+    z-index: 999
+}
+
+.piclist li.on .original {
+    display: block;
+    z-index: 100;
+}
+
+.black_cline { margin-top:0.5rem; margin-bottom:1.5rem; margin-left:auto; margin-right:auto; width:2.4rem; height:0.16rem; background:#494949;}
+.over {position: fixed; left:0; top:0; width:100%; z-index:99;}
+.tempContainer {position:fixed; width:100%; margin-right:0px; margin-left:0px; text-align:center; z-index:100;}
+</style>
+</head>
+<body>
+	<div class="panel panel-primary col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2" style="padding: 0px;margin-bottom: 0px">
+	    <div class="panel-heading" style="margin-left: -0.5px">
+	        <h4 class="panel-title" style="text-align:left;">
+	            <a href="./index.html" >返回</a>
+	        </h4>
+	    </div>
+	</div>
+	<div
+		class="panel panel-primary col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2"
+		style="padding-top:20px">
+		<div class="panel-body">
+			<div class="picshow picshow01">
+				<h2>师生合影</h2>
+				<div class="black_cline"></div>
+				<div class="piclist">
+					<ul>
+						<li class="pic">
+							<div class="in">
+								<div class="imgdiv"><img class="img-thumbnail" src="groupPhotos/TecStuPho/ts01.jpg" /></div>
+							</div>
+						</li>
+						<li class="pic">
+							<div class="in">
+								<div class="imgdiv"><img class="img-thumbnail" src="groupPhotos/TecStuPho/ts02.jpg" /></div>
+							</div>
+						</li>
+						<li class="pic">
+							<div class="in">
+								<div class="imgdiv"><img class="img-thumbnail" src="groupPhotos/TecStuPho/ts03.jpg" /></div>
+							</div>
+						</li>
+						<li class="pic">
+							<div class="in">
+								<div class="imgdiv"><img class="img-thumbnail" src="groupPhotos/TecStuPho/ts04.jpg" /></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+	    </div>
+	</div>
+	<div class="over"></div><!--背景层-->
+</body>
+</html>
