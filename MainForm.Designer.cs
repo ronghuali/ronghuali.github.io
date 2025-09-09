@@ -61,6 +61,8 @@ namespace HtmlPaperManager
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnSearchInPreview = new System.Windows.Forms.Button();
             this.btnReplaceDivBlock = new System.Windows.Forms.Button();
+            this.btnEditMode = new System.Windows.Forms.Button();
+            this.btnRefreshPreview = new System.Windows.Forms.Button();
             this.txtPreview = new System.Windows.Forms.TextBox();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblNotification = new System.Windows.Forms.Label();
@@ -435,6 +437,8 @@ namespace HtmlPaperManager
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btnEditMode);
+            this.groupBox4.Controls.Add(this.btnRefreshPreview);
             this.groupBox4.Controls.Add(this.btnSearchInPreview);
             this.groupBox4.Controls.Add(this.btnReplaceDivBlock);
             this.groupBox4.Controls.Add(this.txtPreview);
@@ -467,6 +471,28 @@ namespace HtmlPaperManager
             this.btnReplaceDivBlock.UseVisualStyleBackColor = true;
             this.btnReplaceDivBlock.Click += new System.EventHandler(this.btnReplaceDivBlock_Click);
             // 
+            // btnEditMode
+            // 
+            this.btnEditMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditMode.Location = new System.Drawing.Point(165, 16);
+            this.btnEditMode.Name = "btnEditMode";
+            this.btnEditMode.Size = new System.Drawing.Size(75, 23);
+            this.btnEditMode.TabIndex = 3;
+            this.btnEditMode.Text = "编辑模式";
+            this.btnEditMode.UseVisualStyleBackColor = true;
+            this.btnEditMode.Click += new System.EventHandler(this.btnEditMode_Click);
+            // 
+            // btnRefreshPreview
+            // 
+            this.btnRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefreshPreview.Location = new System.Drawing.Point(85, 16);
+            this.btnRefreshPreview.Name = "btnRefreshPreview";
+            this.btnRefreshPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnRefreshPreview.TabIndex = 4;
+            this.btnRefreshPreview.Text = "刷新";
+            this.btnRefreshPreview.UseVisualStyleBackColor = true;
+            this.btnRefreshPreview.Click += new System.EventHandler(this.btnRefreshPreview_Click);
+            // 
             // txtPreview
             // 
             this.txtPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -481,6 +507,8 @@ namespace HtmlPaperManager
             this.txtPreview.Size = new System.Drawing.Size(391, 233);
             this.txtPreview.TabIndex = 0;
             this.txtPreview.WordWrap = false;
+            this.txtPreview.AcceptsReturn = true;
+            this.txtPreview.AcceptsTab = true;
             this.txtPreview.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPreview_MouseDoubleClick);
             // 
             // lblNotification
@@ -594,6 +622,8 @@ namespace HtmlPaperManager
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSelectEnglishFile;
         private System.Windows.Forms.Button btnReplaceDivBlock;
+        private System.Windows.Forms.Button btnEditMode;
+        private System.Windows.Forms.Button btnRefreshPreview;
         private System.Windows.Forms.Button btnGit;
         private System.Windows.Forms.Button btnSearchInPreview;
         private System.Windows.Forms.Button btnOpenInBrowser;

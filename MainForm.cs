@@ -22,6 +22,8 @@ namespace HtmlPaperManager
         private AppConfig config;
         private bool isEnglishMode = false;
         private StringBuilder debugInfo; // 调试信息
+        private Form pdfCheckResultForm; // 非模态的PDF检查结果窗口
+        private bool isEditMode = false; // 编辑模式标志
 
         public MainForm()
         {
@@ -32,6 +34,22 @@ namespace HtmlPaperManager
             // 设置ListBox为自定义绘制模式以支持年份条目加粗
             listPapers.DrawMode = DrawMode.OwnerDrawFixed;
             listPapers.DrawItem += ListPapers_DrawItem;
+            
+            // 设置快捷键
+            this.KeyPreview = true;
+            this.KeyDown += MainForm_KeyDown;
+        }
+
+        /// <summary>
+        /// 快捷键处理
+        /// </summary>
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                ShowSearchDialog();
+                e.Handled = true;
+            }
         }
 
         /// <summary>
@@ -1172,6 +1190,266 @@ namespace HtmlPaperManager
             ShowSearchDialog();
         }
 
+        /// <summary>
+        /// 刷新预览按钮点击事件
+        /// </summary>
+        private void btnRefreshPreview_Click(object sender, EventArgs e)
+        {
+            UpdatePreview();
+            ShowNotification("HTML预览已刷新", Color.FromArgb(46, 125, 50));
+        }
+
+        /// <summary>
+        /// 编辑模式按钮点击事件
+        /// </summary>
+        private void btnEditMode_Click(object sender, EventArgs e)
+        {
+            if (isEditMode)
+            {
+                // 当前是编辑模式，点击后尝试保存
+                bool saveSuccessful = TrySavePreviewChanges();
+                
+                // 只有保存成功才切换到只读模式
+                if (saveSuccessful)
+                {
+                    SetPreviewReadOnlyMode();
+                }
+                // 如果保存失败，保持编辑模式让用户继续修改
+            }
+            else
+            {
+                // 当前是只读模式，点击后切换到编辑模式
+                SetPreviewEditMode();
+            }
+        }
+
+        /// <summary>
+        /// 尝试保存预览更改，返回是否成功
+        /// </summary>
+        /// <returns>保存是否成功</returns>
+        private bool TrySavePreviewChanges()
+        {
+            try
+            {
+                string htmlContent = txtPreview.Text;
+                
+                if (string.IsNullOrWhiteSpace(htmlContent))
+                {
+                    MessageBox.Show("预览内容为空，无法保存", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                // 显示保存进度
+                ShowNotification("正在解析HTML内容...", Color.Blue);
+                
+                // 解析修改后的HTML内容
+                var updatedPapers = ParseHtmlContent(htmlContent);
+                
+                if (updatedPapers != null) // 接受空列表
+                {
+                    // 更新论文列表
+                    papers = updatedPapers;
+                    
+                    // 重新分配论文序号
+                    UpdatePaperNumbers();
+                    
+                    // 刷新左侧列表
+                    RefreshPapersList();
+                    
+                    // 重新生成预览（确保格式一致性）
+                    UpdatePreview();
+                    
+                    ShowNotification($"保存成功！解析到 {updatedPapers.Count} 个条目", Color.FromArgb(46, 125, 50));
+                    return true;
+                }
+                else
+                {
+                    ShowNotification("解析失败 - 请检查HTML格式", Color.Red);
+                    MessageBox.Show("HTML解析失败，请检查格式后重试。\n\n常见问题：\n1. HTML标签未正确闭合\n2. 特殊字符未转义\n3. 缺少必要的标签结构", 
+                        "解析失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowNotification($"保存失败：{ex.Message}", Color.Red);
+                MessageBox.Show($"保存时发生错误：{ex.Message}\n\n请检查HTML格式是否正确。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 设置预览为编辑模式
+        /// </summary>
+        private void SetPreviewEditMode()
+        {
+            try
+            {
+                isEditMode = true;
+                
+                // 彻底重置TextBox的所有编辑相关属性
+                txtPreview.SuspendLayout();
+                
+                txtPreview.ReadOnly = false;
+                txtPreview.Enabled = true;
+                txtPreview.Multiline = true;
+                txtPreview.AcceptsReturn = true;
+                txtPreview.AcceptsTab = true;
+                txtPreview.WordWrap = true;
+                txtPreview.ScrollBars = ScrollBars.Vertical;
+                txtPreview.BackColor = Color.White;
+                txtPreview.ForeColor = Color.Black;
+                
+                // 确保没有任何限制
+                txtPreview.MaxLength = 0; // 无长度限制
+                txtPreview.HideSelection = false;
+                
+                txtPreview.ResumeLayout();
+                
+                // 按钮状态更新
+                btnEditMode.Text = "保存";
+                btnEditMode.BackColor = Color.FromArgb(46, 125, 50);
+                btnEditMode.ForeColor = Color.White;
+                
+                // 强制应用更改并获取焦点
+                Application.DoEvents();
+                txtPreview.Focus();
+                txtPreview.SelectionStart = txtPreview.Text.Length; // 定位到末尾
+                txtPreview.SelectionLength = 0;
+                
+                // 显示调试信息
+                ShowNotification($"编辑模式已激活 - 可以输入文字了！", Color.Green);
+                
+                // 测试输入能力
+                var originalLength = txtPreview.Text.Length;
+                txtPreview.AppendText(""); // 测试追加功能
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"设置编辑模式时出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 设置预览为只读模式
+        /// </summary>
+        private void SetPreviewReadOnlyMode()
+        {
+            try
+            {
+                isEditMode = false;
+                
+                // 设置为只读状态
+                txtPreview.ReadOnly = true;
+                txtPreview.BackColor = SystemColors.Control;
+                txtPreview.WordWrap = false;
+                txtPreview.ScrollBars = ScrollBars.Both;
+                
+                // 按钮状态更新
+                btnEditMode.Text = "编辑模式";
+                btnEditMode.BackColor = SystemColors.Control;
+                btnEditMode.ForeColor = SystemColors.ControlText;
+                
+                // 强制刷新控件状态
+                txtPreview.Refresh();
+                
+                ShowNotification("已切换到只读模式", Color.Gray);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"设置只读模式时出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 解析HTML内容字符串
+        /// </summary>
+        /// <param name="htmlContent">HTML内容</param>
+        /// <returns>论文列表</returns>
+        private List<Paper> ParseHtmlContent(string htmlContent)
+        {
+            string tempFile = null;
+            try
+            {
+                // 清理HTML内容 - 移除可能的BOM和多余空白
+                htmlContent = htmlContent.Trim();
+                if (htmlContent.StartsWith("\uFEFF"))
+                {
+                    htmlContent = htmlContent.Substring(1);
+                }
+                
+                // 创建临时HTML文件
+                tempFile = Path.GetTempFileName() + ".html";
+                
+                // 包装成完整的HTML文档
+                var fullHtml = $@"<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=""UTF-8"">
+    <title>Paper List</title>
+</head>
+<body>
+    <div id=""papers"">
+{htmlContent}
+    </div>
+</body>
+</html>";
+                
+                // 写入文件
+                File.WriteAllText(tempFile, fullHtml, new UTF8Encoding(false));
+                
+                // 验证文件写入成功
+                if (!File.Exists(tempFile))
+                {
+                    throw new Exception("无法创建临时HTML文件");
+                }
+                
+                // 使用现有的解析器解析
+                var parser = new HtmlParser();
+                var debugInfo = new StringBuilder();
+                var result = parser.ParseHtmlFileWithDebug(tempFile, debugInfo);
+                
+                // 输出调试信息（可选）
+                if (debugInfo.Length > 0 && result == null)
+                {
+                    ShowNotification("查看调试信息了解解析详情", Color.Orange);
+                    // 这里可以选择性地显示调试信息
+                }
+                
+                return result ?? new List<Paper>(); // 确保返回非null值
+            }
+            catch (Exception ex)
+            {
+                ShowNotification($"解析错误：{ex.Message}", Color.Red);
+                return null;
+            }
+            finally
+            {
+                // 清理临时文件
+                if (tempFile != null && File.Exists(tempFile))
+                {
+                    try
+                    {
+                        File.Delete(tempFile);
+                    }
+                    catch
+                    {
+                        // 忽略删除临时文件的错误
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 刷新论文列表显示
+        /// </summary>
+        private void RefreshPapersList()
+        {
+            listPapers.DataSource = null;
+            listPapers.DataSource = papers;
+        }
+
         private void ShowGitDialog()
         {
             string workingDirectory = "";
@@ -1598,11 +1876,18 @@ namespace HtmlPaperManager
                 return;
             }
 
-            var existingPapers = new List<Paper>();
-            var missingPapers = new List<(Paper paper, string fullPath)>();
+            var existingPapers = new List<(Paper paper, int paperIndex)>();
+            var missingPapers = new List<(Paper paper, int paperIndex, string fullPath)>();
 
-            foreach (var paper in pdfPapers)
+            // 计算论文条目在论文中的序号（不包括年份和注释条目）
+            var paperEntries = papers.Where(p => p.EntryType == PaperEntryType.Paper).ToList();
+            
+            for (int i = 0; i < pdfPapers.Count; i++)
             {
+                var paper = pdfPapers[i];
+                // 在论文条目列表中找到该论文的序号
+                int paperIndex = paperEntries.FindIndex(p => p == paper) + 1;
+                
                 string pdfPath = paper.PdfLink.Trim();
                 
                 // 处理相对路径
@@ -1617,11 +1902,11 @@ namespace HtmlPaperManager
 
                 if (File.Exists(pdfPath))
                 {
-                    existingPapers.Add(paper);
+                    existingPapers.Add((paper, paperIndex));
                 }
                 else
                 {
-                    missingPapers.Add((paper, pdfPath));
+                    missingPapers.Add((paper, paperIndex, pdfPath));
                 }
             }
 
@@ -1630,17 +1915,24 @@ namespace HtmlPaperManager
         }
 
         /// <summary>
-        /// 显示美观简洁的PDF检查结果
+        /// 显示美观简洁的PDF检查结果（非模态）
         /// </summary>
-        private void ShowPdfCheckResult(int totalCount, List<Paper> existingPapers, List<(Paper paper, string fullPath)> missingPapers)
+        private void ShowPdfCheckResult(int totalCount, List<(Paper paper, int paperIndex)> existingPapers, List<(Paper paper, int paperIndex, string fullPath)> missingPapers)
         {
-            Form resultForm = new Form()
+            // 如果窗口已经存在，先关闭它
+            if (pdfCheckResultForm != null && !pdfCheckResultForm.IsDisposed)
+            {
+                pdfCheckResultForm.Close();
+            }
+
+            pdfCheckResultForm = new Form()
             {
                 Text = "PDF文件检查结果",
                 Size = new Size(650, 550),
                 StartPosition = FormStartPosition.CenterParent,
                 ShowIcon = false,
-                MinimumSize = new Size(500, 400)
+                MinimumSize = new Size(500, 400),
+                Owner = this // 设置所有者窗口
             };
 
             // 统计信息面板
@@ -1710,25 +2002,31 @@ namespace HtmlPaperManager
             if (existingPapers.Count > 0)
             {
                 resultText.AppendLine("✅ 存在的PDF文件:");
-                resultText.AppendLine(new string('─', 50));
-                foreach (var paper in existingPapers)
+                resultText.AppendLine(new string('─', 70));
+                foreach (var (paper, paperIndex) in existingPapers)
                 {
-                    // 截取过长的标题
+                    // 显示序号和标题
                     string title = paper.Title.Length > 60 ? paper.Title.Substring(0, 57) + "..." : paper.Title;
-                    resultText.AppendLine($"  • {title}");
+                    resultText.AppendLine($"{paperIndex}. {title}");
+                    // 换行缩进显示PDF链接
+                    resultText.AppendLine($"    PDF: {paper.PdfLink}");
+                    resultText.AppendLine();
                 }
-                resultText.AppendLine();
             }
 
             if (missingPapers.Count > 0)
             {
                 resultText.AppendLine("❌ 缺失的PDF文件:");
-                resultText.AppendLine(new string('─', 50));
-                foreach (var (paper, fullPath) in missingPapers)
+                resultText.AppendLine(new string('─', 70));
+                foreach (var (paper, paperIndex, fullPath) in missingPapers)
                 {
-                    string title = paper.Title.Length > 40 ? paper.Title.Substring(0, 37) + "..." : paper.Title;
-                    resultText.AppendLine($"  • {title}");
-                    resultText.AppendLine($"    路径: {fullPath}");
+                    // 显示序号和标题
+                    string title = paper.Title.Length > 60 ? paper.Title.Substring(0, 57) + "..." : paper.Title;
+                    resultText.AppendLine($"{paperIndex}. {title}");
+                    // 换行缩进显示PDF链接
+                    resultText.AppendLine($"    PDF: {paper.PdfLink}");
+                    // 换行缩进显示完整路径
+                    resultText.AppendLine($"    完整路径: {fullPath}");
                     resultText.AppendLine();
                 }
             }
@@ -1751,17 +2049,19 @@ namespace HtmlPaperManager
             {
                 Text = "关闭",
                 Size = new Size(75, 30),
-                Location = new Point(resultForm.Width - 95, 10),
+                Location = new Point(pdfCheckResultForm.Width - 95, 10),
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Right
             };
 
-            btnClose.Click += (s, args) => resultForm.Close();
+            btnClose.Click += (s, args) => pdfCheckResultForm.Close();
             buttonPanel.Controls.Add(btnClose);
 
-            resultForm.Controls.Add(txtResult);
-            resultForm.Controls.Add(summaryPanel);
-            resultForm.Controls.Add(buttonPanel);
-            resultForm.ShowDialog();
+            pdfCheckResultForm.Controls.Add(txtResult);
+            pdfCheckResultForm.Controls.Add(summaryPanel);
+            pdfCheckResultForm.Controls.Add(buttonPanel);
+            
+            // 使用 Show() 而不是 ShowDialog() 来显示非模态窗口
+            pdfCheckResultForm.Show();
         }
     }
 }
