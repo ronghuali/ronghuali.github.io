@@ -13,17 +13,19 @@ namespace HtmlPaperManager
     public partial class PaperEditDialog : Form
     {
         private HtmlGenerator htmlGenerator;
+        private string htmlFolderPath; // 添加HTML文件夹路径字段
 
         public Paper Paper { get; private set; }
 
-        public PaperEditDialog() : this(new Paper())
+        public PaperEditDialog() : this(new Paper(), "")
         {
         }
 
-        public PaperEditDialog(Paper paper)
+        public PaperEditDialog(Paper paper, string htmlFolder = "")
         {
             InitializeComponent();
             htmlGenerator = new HtmlGenerator();
+            htmlFolderPath = htmlFolder;
             Paper = new Paper
             {
                 Authors = paper.Authors,
@@ -40,6 +42,7 @@ namespace HtmlPaperManager
 
             LoadPaperData();
             UpdatePreview();
+            UpdatePdfButtonState(); // 添加PDF按钮状态更新
         }
 
         private void LoadPaperData()
@@ -148,6 +151,64 @@ namespace HtmlPaperManager
             UpdatePreview();
         }
 
+        /// <summary>
+        /// 打开PDF文件按钮点击事件
+        /// </summary>
+        private void btnOpenPdf_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPdfLink.Text))
+            {
+                MessageBox.Show("PDF链接为空", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                string pdfPath = txtPdfLink.Text.Trim();
+                
+                // 如果是相对路径，结合HTML文件夹路径
+                if (!Path.IsPathRooted(pdfPath) && !string.IsNullOrEmpty(htmlFolderPath))
+                {
+                    // 处理相对路径，如 "./PaperFiles/xxx.pdf"
+                    if (pdfPath.StartsWith("./"))
+                    {
+                        pdfPath = pdfPath.Substring(2); // 移除 "./"
+                    }
+                    
+                    pdfPath = Path.Combine(htmlFolderPath, pdfPath);
+                }
+
+                if (File.Exists(pdfPath))
+                {
+                    // 使用默认程序打开PDF
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = pdfPath,
+                        UseShellExecute = true, // 使用系统默认程序打开
+                        WorkingDirectory = htmlFolderPath // 设置工作目录为HTML文件夹
+                    });
+                }
+                else
+                {
+                    MessageBox.Show($"PDF文件不存在:\n{pdfPath}", "文件不存在", 
+                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"无法打开PDF文件:\n{ex.Message}", "打开失败", 
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 更新PDF按钮状态
+        /// </summary>
+        private void UpdatePdfButtonState()
+        {
+            btnOpenPdf.Enabled = !string.IsNullOrWhiteSpace(txtPdfLink.Text);
+        }
+
         private void txtAuthors_TextChanged(object sender, EventArgs e)
         {
             UpdatePreview();
@@ -166,6 +227,7 @@ namespace HtmlPaperManager
         private void txtPdfLink_TextChanged(object sender, EventArgs e)
         {
             UpdatePreview();
+            UpdatePdfButtonState(); // 更新PDF按钮状态
         }
 
         private void txtCodeLink_TextChanged(object sender, EventArgs e)

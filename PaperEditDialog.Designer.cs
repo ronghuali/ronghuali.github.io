@@ -37,6 +37,7 @@ namespace HtmlPaperManager
             this.label4 = new System.Windows.Forms.Label();
             this.txtPdfLink = new System.Windows.Forms.TextBox();
             this.btnSelectPdf = new System.Windows.Forms.Button();
+            this.btnOpenPdf = new System.Windows.Forms.Button();
             this.chkShowPdf = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCodeLink = new System.Windows.Forms.TextBox();
@@ -117,19 +118,30 @@ namespace HtmlPaperManager
             // 
             this.txtPdfLink.Location = new System.Drawing.Point(77, 162);
             this.txtPdfLink.Name = "txtPdfLink";
-            this.txtPdfLink.Size = new System.Drawing.Size(350, 21);
+            this.txtPdfLink.Size = new System.Drawing.Size(270, 21);
             this.txtPdfLink.TabIndex = 7;
             this.txtPdfLink.TextChanged += new System.EventHandler(this.txtPdfLink_TextChanged);
             // 
             // btnSelectPdf
             // 
-            this.btnSelectPdf.Location = new System.Drawing.Point(433, 160);
+            this.btnSelectPdf.Location = new System.Drawing.Point(353, 160);
             this.btnSelectPdf.Name = "btnSelectPdf";
             this.btnSelectPdf.Size = new System.Drawing.Size(60, 23);
             this.btnSelectPdf.TabIndex = 8;
             this.btnSelectPdf.Text = "选择文件";
             this.btnSelectPdf.UseVisualStyleBackColor = true;
             this.btnSelectPdf.Click += new System.EventHandler(this.btnSelectPdf_Click);
+            // 
+            // btnOpenPdf
+            // 
+            this.btnOpenPdf.Enabled = false;
+            this.btnOpenPdf.Location = new System.Drawing.Point(419, 160);
+            this.btnOpenPdf.Name = "btnOpenPdf";
+            this.btnOpenPdf.Size = new System.Drawing.Size(60, 23);
+            this.btnOpenPdf.TabIndex = 20;
+            this.btnOpenPdf.Text = "打开PDF";
+            this.btnOpenPdf.UseVisualStyleBackColor = true;
+            this.btnOpenPdf.Click += new System.EventHandler(this.btnOpenPdf_Click);
             // 
             // chkShowPdf
             // 
@@ -212,7 +224,7 @@ namespace HtmlPaperManager
             // 
             // btnGeneratePdf
             // 
-            this.btnGeneratePdf.Location = new System.Drawing.Point(499, 160);
+            this.btnGeneratePdf.Location = new System.Drawing.Point(485, 160);
             this.btnGeneratePdf.Name = "btnGeneratePdf";
             this.btnGeneratePdf.Size = new System.Drawing.Size(60, 23);
             this.btnGeneratePdf.TabIndex = 18;
@@ -239,6 +251,7 @@ namespace HtmlPaperManager
             this.ClientSize = new System.Drawing.Size(574, 482);
             this.Controls.Add(this.btnDefaultCode);
             this.Controls.Add(this.btnGeneratePdf);
+            this.Controls.Add(this.btnOpenPdf);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.groupBox1);
@@ -278,6 +291,7 @@ namespace HtmlPaperManager
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtPdfLink;
         private System.Windows.Forms.Button btnSelectPdf;
+        private System.Windows.Forms.Button btnOpenPdf;
         private System.Windows.Forms.CheckBox chkShowPdf;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtCodeLink;

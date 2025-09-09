@@ -380,7 +380,7 @@ namespace HtmlPaperManager
 
         private void btnAddPaper_Click(object sender, EventArgs e)
         {
-            using (var dialog = new PaperEditDialog())
+            using (var dialog = new PaperEditDialog(new Paper(), txtHtmlFolderPath.Text))
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -432,7 +432,7 @@ namespace HtmlPaperManager
 
         private void EditPaper(int index, Paper paper)
         {
-            using (var dialog = new PaperEditDialog(paper))
+            using (var dialog = new PaperEditDialog(paper, txtHtmlFolderPath.Text))
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
