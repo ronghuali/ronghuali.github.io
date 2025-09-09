@@ -220,9 +220,33 @@ namespace HtmlPaperManager
             try
             {
                 config = AppConfig.Load();
+                
+                // 设置HTML文件夹路径
+                if (!string.IsNullOrEmpty(config.HtmlFolderPath))
+                {
+                    txtHtmlFolderPath.Text = config.HtmlFolderPath;
+                }
+                
+                // 设置英文版路径
+                if (!string.IsNullOrEmpty(config.EnglishFilePath))
+                {
+                    txtEnglishFilePath.Text = config.EnglishFilePath;
+                }
+                
+                // 加载上次打开的文件
                 if (!string.IsNullOrEmpty(config.LastOpenedFile) && File.Exists(config.LastOpenedFile))
                 {
                     LoadHtmlFile(config.LastOpenedFile, false);
+                    // 根据当前文件路径更新其他路径
+                    UpdatePathsFromCurrentFile();
+                }
+                else
+                {
+                    // 如果没有上次打开的文件，但有其他路径配置，尝试更新
+                    if (!string.IsNullOrEmpty(txtHtmlFolderPath.Text))
+                    {
+                        UpdateDefaultPaths();
+                    }
                 }
             }
             catch (Exception ex)
@@ -241,8 +265,13 @@ namespace HtmlPaperManager
                 if (!string.IsNullOrEmpty(currentHtmlPath))
                 {
                     config.LastOpenedFile = currentHtmlPath;
-                    config.Save();
                 }
+
+                // 保存HTML文件夹和英文版路径
+                config.HtmlFolderPath = txtHtmlFolderPath.Text;
+                config.EnglishFilePath = txtEnglishFilePath.Text;
+                
+                config.Save();
             }
             catch (Exception ex)
             {
@@ -821,18 +850,10 @@ namespace HtmlPaperManager
                 
                 if (string.IsNullOrWhiteSpace(contextText)) return;
 
-                // 添加调试信息
-                AppendDebugInfo($"双击定位调试信息:");
-                AppendDebugInfo($"双击位置字符索引: {charIndex}");
-                AppendDebugInfo($"提取的上下文文本: {contextText}");
-                AppendDebugInfo($"-----");
-
                 // 尝试从上下文中提取论文信息
                 Paper targetPaper = FindPaperFromHtmlContext(contextText);
                 if (targetPaper != null)
                 {
-                    AppendDebugInfo($"成功匹配到论文: {targetPaper.Title}");
-                    
                     // 在listPapers中找到对应的条目并选中
                     for (int i = 0; i < listPapers.Items.Count; i++)
                     {
@@ -840,20 +861,13 @@ namespace HtmlPaperManager
                         {
                             listPapers.SelectedIndex = i;
                             listPapers.Focus();
-                            AppendDebugInfo($"成功定位到列表第 {i + 1} 项");
                             break;
                         }
                     }
                 }
-                else
-                {
-                    AppendDebugInfo("未能匹配到对应的论文条目");
-                }
-                AppendDebugInfo("========================================");
             }
             catch (Exception ex)
             {
-                AppendDebugInfo($"双击定位异常: {ex.Message}");
                 System.Diagnostics.Debug.WriteLine($"双击定位失败: {ex.Message}");
             }
         }
@@ -936,12 +950,9 @@ namespace HtmlPaperManager
             string cleanText = System.Text.RegularExpressions.Regex.Replace(htmlContext, "<[^>]+>", "").Trim();
             cleanText = cleanText.Replace("&nbsp;", " ").Replace("  ", " ");
             
-            AppendDebugInfo($"清理后的文本: {cleanText}");
-
             if (string.IsNullOrWhiteSpace(cleanText)) return null;
 
             var paperCandidates = papers.Where(p => p.EntryType == PaperEntryType.Paper).ToList();
-            AppendDebugInfo($"总论文数量: {paperCandidates.Count}");
 
             // 按匹配优先级进行匹配
             Paper bestMatch = null;
@@ -1002,12 +1013,6 @@ namespace HtmlPaperManager
                     reason += $"PDF链接匹配; ";
                 }
 
-                // 记录匹配信息
-                if (score > 0)
-                {
-                    AppendDebugInfo($"论文 '{paper.Title}' 得分: {score}, 原因: {reason}");
-                }
-
                 // 更新最佳匹配
                 if (score > bestScore)
                 {
@@ -1017,12 +1022,429 @@ namespace HtmlPaperManager
                 }
             }
 
-            if (bestMatch != null)
+            return bestMatch;
+        }
+
+        private void btnSelectHtmlFolder_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
             {
-                AppendDebugInfo($"最佳匹配: '{bestMatch.Title}' (得分: {bestScore}, 原因: {bestReason})");
+                dialog.Description = "选择HTML文件夹";
+                if (!string.IsNullOrEmpty(txtHtmlFolderPath.Text))
+                {
+                    dialog.SelectedPath = txtHtmlFolderPath.Text;
+                }
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    txtHtmlFolderPath.Text = dialog.SelectedPath;
+                    
+                    // 自动设置默认路径
+                    UpdateDefaultPaths();
+                    SaveConfig();
+                    
+                    ShowNotification("HTML文件夹路径已更新", Color.Green);
+                }
+            }
+        }
+
+        private void btnSelectEnglishFile_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "HTML files (*.html)|*.html|All files (*.*)|*.*";
+                dialog.Title = "选择英文版HTML文件";
+                
+                if (!string.IsNullOrEmpty(txtEnglishFilePath.Text) && File.Exists(txtEnglishFilePath.Text))
+                {
+                    dialog.InitialDirectory = Path.GetDirectoryName(txtEnglishFilePath.Text);
+                    dialog.FileName = Path.GetFileName(txtEnglishFilePath.Text);
+                }
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    txtEnglishFilePath.Text = dialog.FileName;
+                    
+                    // 根据英文版文件推导HTML文件夹路径
+                    UpdatePathsFromEnglishFile();
+                    SaveConfig();
+                    
+                    ShowNotification("英文版文件路径已更新", Color.Green);
+                }
+            }
+        }
+
+        private void btnReplaceDivBlock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (papers.Count == 0)
+                {
+                    MessageBox.Show("没有论文数据，无法替换div块", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string targetFilePath = "";
+                string fileType = "";
+
+                if (isEnglishMode)
+                {
+                    // 英文版模式
+                    if (string.IsNullOrEmpty(txtEnglishFilePath.Text))
+                    {
+                        MessageBox.Show("请先设置英文版文件路径", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    targetFilePath = txtEnglishFilePath.Text;
+                    fileType = "英文版";
+                }
+                else
+                {
+                    // 中文版模式
+                    if (string.IsNullOrEmpty(txtFilePath.Text))
+                    {
+                        MessageBox.Show("请先选择HTML文件", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    targetFilePath = txtFilePath.Text;
+                    fileType = "中文版";
+                }
+
+                if (!File.Exists(targetFilePath))
+                {
+                    MessageBox.Show($"{fileType}文件不存在：{targetFilePath}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 读取目标文件内容
+                string fileContent = File.ReadAllText(targetFilePath, Encoding.UTF8);
+                
+                // 获取预览内容
+                string previewContent = txtPreview.Text;
+                if (string.IsNullOrWhiteSpace(previewContent))
+                {
+                    MessageBox.Show("预览内容为空，无法替换", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 查找div块并替换
+                string pattern = @"<div id=""papers"">.*?</div>";
+                var regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.Singleline);
+                
+                if (regex.IsMatch(fileContent))
+                {
+                    // 从预览内容中提取div块
+                    var previewMatch = regex.Match(previewContent);
+                    if (previewMatch.Success)
+                    {
+                        string newDivContent = previewMatch.Value;
+                        string newFileContent = regex.Replace(fileContent, newDivContent);
+                        
+                        // 写回文件
+                        File.WriteAllText(targetFilePath, newFileContent, Encoding.UTF8);
+                        
+                        MessageBox.Show($"{fileType}文件的div块已成功替换！\n文件路径：{targetFilePath}", 
+                            "替换成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("预览内容中没有找到div块", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"{fileType}文件中没有找到<div id=\"papers\">块", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"替换div块时发生错误：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnGit_Click(object sender, EventArgs e)
+        {
+            ShowGitDialog();
+        }
+
+        private void btnSearchInPreview_Click(object sender, EventArgs e)
+        {
+            ShowSearchDialog();
+        }
+
+        private void ShowGitDialog()
+        {
+            string workingDirectory = "";
+            
+            // 确定Git工作目录
+            if (!string.IsNullOrEmpty(txtHtmlFolderPath.Text) && Directory.Exists(txtHtmlFolderPath.Text))
+            {
+                workingDirectory = txtHtmlFolderPath.Text;
+            }
+            else if (!string.IsNullOrEmpty(currentHtmlPath))
+            {
+                workingDirectory = Path.GetDirectoryName(currentHtmlPath);
+            }
+            else
+            {
+                MessageBox.Show("请先设置HTML文件夹路径", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            return bestMatch;
+            // 创建Git操作窗口
+            Form gitForm = new Form()
+            {
+                Text = "Git操作",
+                Size = new Size(600, 500),
+                MinimumSize = new Size(500, 400),
+                StartPosition = FormStartPosition.CenterParent,
+                ShowIcon = false
+            };
+
+            // 工作目录标签
+            Label lblWorkDir = new Label()
+            {
+                Text = $"工作目录：{workingDirectory}",
+                Location = new Point(10, 10),
+                Size = new Size(580, 20),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            // Git Add按钮
+            Button btnGitAdd = new Button()
+            {
+                Text = "git add -A",
+                Location = new Point(10, 40),
+                Size = new Size(100, 30)
+            };
+
+            // Commit消息输入框
+            Label lblCommitMsg = new Label()
+            {
+                Text = "提交消息:",
+                Location = new Point(120, 45),
+                Size = new Size(70, 20)
+            };
+
+            TextBox txtCommitMsg = new TextBox()
+            {
+                Location = new Point(200, 43),
+                Size = new Size(250, 25),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            // Git Commit按钮
+            Button btnGitCommit = new Button()
+            {
+                Text = "git commit",
+                Location = new Point(460, 40),
+                Size = new Size(100, 30),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
+            };
+
+            // Git Push按钮
+            Button btnGitPush = new Button()
+            {
+                Text = "git push",
+                Location = new Point(10, 80),
+                Size = new Size(100, 30)
+            };
+
+            // 输出文本框
+            TextBox txtOutput = new TextBox()
+            {
+                Location = new Point(10, 120),
+                Size = new Size(560, 320),
+                Multiline = true,
+                ScrollBars = ScrollBars.Both,
+                ReadOnly = true,
+                Font = new Font("Consolas", 9),
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            // 事件处理
+            btnGitAdd.Click += (s, e) => ExecuteGitCommand("git add -A", workingDirectory, txtOutput);
+            btnGitCommit.Click += (s, e) => 
+            {
+                if (string.IsNullOrWhiteSpace(txtCommitMsg.Text))
+                {
+                    MessageBox.Show("请输入提交消息", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                ExecuteGitCommand($"git commit -m \"{txtCommitMsg.Text}\"", workingDirectory, txtOutput);
+            };
+            btnGitPush.Click += (s, e) => ExecuteGitCommand("git push", workingDirectory, txtOutput);
+
+            // 添加控件
+            gitForm.Controls.AddRange(new Control[] 
+            { 
+                lblWorkDir, btnGitAdd, lblCommitMsg, txtCommitMsg, btnGitCommit, btnGitPush, txtOutput 
+            });
+
+            gitForm.ShowDialog();
+        }
+
+        private void ExecuteGitCommand(string command, string workingDirectory, TextBox outputTextBox)
+        {
+            try
+            {
+                outputTextBox.AppendText($"> {command}\r\n");
+                
+                var processInfo = new System.Diagnostics.ProcessStartInfo()
+                {
+                    FileName = "git",
+                    Arguments = command.Substring(4), // 去掉"git "前缀
+                    WorkingDirectory = workingDirectory,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var process = System.Diagnostics.Process.Start(processInfo))
+                {
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+                    
+                    process.WaitForExit();
+
+                    if (!string.IsNullOrEmpty(output))
+                    {
+                        outputTextBox.AppendText(output + "\r\n");
+                    }
+                    
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        outputTextBox.AppendText("错误: " + error + "\r\n");
+                    }
+
+                    outputTextBox.AppendText($"命令执行完成，退出代码: {process.ExitCode}\r\n\r\n");
+                    outputTextBox.SelectionStart = outputTextBox.Text.Length;
+                    outputTextBox.ScrollToCaret();
+                }
+            }
+            catch (Exception ex)
+            {
+                outputTextBox.AppendText($"执行命令时发生错误: {ex.Message}\r\n\r\n");
+            }
+        }
+
+        private void ShowSearchDialog()
+        {
+            if (string.IsNullOrEmpty(txtPreview.Text))
+            {
+                MessageBox.Show("预览内容为空", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string searchText = ShowInputDialog("搜索", "请输入要搜索的内容:");
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                SearchInPreview(searchText);
+            }
+        }
+
+        private void SearchInPreview(string searchText)
+        {
+            if (string.IsNullOrEmpty(searchText) || string.IsNullOrEmpty(txtPreview.Text))
+                return;
+
+            int startIndex = txtPreview.SelectionStart + txtPreview.SelectionLength;
+            int foundIndex = txtPreview.Text.IndexOf(searchText, startIndex, StringComparison.OrdinalIgnoreCase);
+            
+            if (foundIndex == -1)
+            {
+                // 从头开始搜索
+                foundIndex = txtPreview.Text.IndexOf(searchText, 0, StringComparison.OrdinalIgnoreCase);
+            }
+
+            if (foundIndex >= 0)
+            {
+                txtPreview.Select(foundIndex, searchText.Length);
+                txtPreview.ScrollToCaret();
+                txtPreview.Focus();
+                ShowNotification($"找到匹配项 (位置: {foundIndex})", Color.Green);
+            }
+            else
+            {
+                ShowNotification("未找到匹配项", Color.Orange);
+            }
+        }
+
+        private void UpdateDefaultPaths()
+        {
+            if (!string.IsNullOrEmpty(txtHtmlFolderPath.Text))
+            {
+                string folderPath = txtHtmlFolderPath.Text;
+                
+                // 如果中文版路径为空，设置默认值
+                if (string.IsNullOrEmpty(txtFilePath.Text))
+                {
+                    string indexPath = Path.Combine(folderPath, "index.html");
+                    if (File.Exists(indexPath))
+                    {
+                        txtFilePath.Text = indexPath;
+                    }
+                }
+                
+                // 如果英文版路径为空，设置默认值
+                if (string.IsNullOrEmpty(txtEnglishFilePath.Text))
+                {
+                    string englishPath = Path.Combine(folderPath, "ronghuali.html");
+                    if (File.Exists(englishPath))
+                    {
+                        txtEnglishFilePath.Text = englishPath;
+                    }
+                }
+            }
+        }
+
+        private void UpdatePathsFromEnglishFile()
+        {
+            if (!string.IsNullOrEmpty(txtEnglishFilePath.Text) && File.Exists(txtEnglishFilePath.Text))
+            {
+                string folderPath = Path.GetDirectoryName(txtEnglishFilePath.Text);
+                
+                // 设置HTML文件夹路径
+                if (string.IsNullOrEmpty(txtHtmlFolderPath.Text))
+                {
+                    txtHtmlFolderPath.Text = folderPath;
+                }
+                
+                // 设置中文版路径
+                if (string.IsNullOrEmpty(txtFilePath.Text))
+                {
+                    string indexPath = Path.Combine(folderPath, "index.html");
+                    if (File.Exists(indexPath))
+                    {
+                        txtFilePath.Text = indexPath;
+                    }
+                }
+            }
+        }
+
+        private void UpdatePathsFromCurrentFile()
+        {
+            if (!string.IsNullOrEmpty(currentHtmlPath) && File.Exists(currentHtmlPath))
+            {
+                string folderPath = Path.GetDirectoryName(currentHtmlPath);
+                
+                // 设置HTML文件夹路径
+                if (string.IsNullOrEmpty(txtHtmlFolderPath.Text))
+                {
+                    txtHtmlFolderPath.Text = folderPath;
+                }
+                
+                // 设置英文版路径
+                if (string.IsNullOrEmpty(txtEnglishFilePath.Text))
+                {
+                    string englishPath = Path.Combine(folderPath, "ronghuali.html");
+                    if (File.Exists(englishPath))
+                    {
+                        txtEnglishFilePath.Text = englishPath;
+                    }
+                }
+            }
         }
     }
 }

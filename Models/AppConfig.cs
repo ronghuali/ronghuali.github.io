@@ -15,6 +15,16 @@ namespace HtmlPaperManager.Models
         public string LastOpenedFile { get; set; } = "";
 
         /// <summary>
+        /// HTML文件夹路径
+        /// </summary>
+        public string HtmlFolderPath { get; set; } = "";
+
+        /// <summary>
+        /// 英文版HTML文件路径
+        /// </summary>
+        public string EnglishFilePath { get; set; } = "";
+
+        /// <summary>
         /// 窗口位置X坐标
         /// </summary>
         public int WindowX { get; set; } = 100;

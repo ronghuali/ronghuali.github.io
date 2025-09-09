@@ -94,7 +94,9 @@ namespace HtmlPaperManager.Models
         {
             if (!string.IsNullOrEmpty(Title))
             {
-                PdfLink = $"./PaperFiles/{Title}.pdf";
+                // 去掉标题中的冒号，避免文件路径问题
+                string cleanTitle = Title.Replace(":", "");
+                PdfLink = $"./PaperFiles/{cleanTitle}.pdf";
             }
         }
 

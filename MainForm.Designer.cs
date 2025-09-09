@@ -33,8 +33,15 @@ namespace HtmlPaperManager
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.txtHtmlFolderPath = new System.Windows.Forms.TextBox();
+            this.lblHtmlFolder = new System.Windows.Forms.Label();
+            this.btnSelectHtmlFolder = new System.Windows.Forms.Button();
+            this.txtEnglishFilePath = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnSelectEnglishFile = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnGit = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnAddComment = new System.Windows.Forms.Button();
@@ -49,6 +56,8 @@ namespace HtmlPaperManager
             this.txtImport = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnSearchInPreview = new System.Windows.Forms.Button();
+            this.btnReplaceDivBlock = new System.Windows.Forms.Button();
             this.txtPreview = new System.Windows.Forms.TextBox();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblNotification = new System.Windows.Forms.Label();
@@ -69,13 +78,19 @@ namespace HtmlPaperManager
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnSelectEnglishFile);
+            this.groupBox1.Controls.Add(this.txtEnglishFilePath);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.btnSelectHtmlFolder);
+            this.groupBox1.Controls.Add(this.txtHtmlFolderPath);
+            this.groupBox1.Controls.Add(this.lblHtmlFolder);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtFilePath);
             this.groupBox1.Controls.Add(this.btnSelectFile);
             this.groupBox1.Controls.Add(this.btnOpenFolder);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1176, 60);
+            this.groupBox1.Size = new System.Drawing.Size(1176, 120);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "文件选择";
@@ -85,7 +100,7 @@ namespace HtmlPaperManager
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(12, 78);
+            this.splitContainer1.Location = new System.Drawing.Point(12, 138);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -95,7 +110,7 @@ namespace HtmlPaperManager
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1176, 480);
+            this.splitContainer1.Size = new System.Drawing.Size(1176, 420);
             this.splitContainer1.SplitterDistance = 750;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -108,13 +123,13 @@ namespace HtmlPaperManager
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(422, 480);
+            this.panel1.Size = new System.Drawing.Size(422, 420);
             this.panel1.TabIndex = 0;
             // 
             // btnSelectFile
             // 
             this.btnSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectFile.Location = new System.Drawing.Point(1095, 20);
+            this.btnSelectFile.Location = new System.Drawing.Point(730, 20);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(75, 23);
             this.btnSelectFile.TabIndex = 0;
@@ -125,7 +140,7 @@ namespace HtmlPaperManager
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(1000, 20);
+            this.btnOpenFolder.Location = new System.Drawing.Point(811, 20);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(90, 23);
             this.btnOpenFolder.TabIndex = 3;
@@ -139,7 +154,7 @@ namespace HtmlPaperManager
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilePath.Location = new System.Drawing.Point(80, 22);
             this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(910, 21);
+            this.txtFilePath.Size = new System.Drawing.Size(640, 21);
             this.txtFilePath.TabIndex = 1;
             // 
             // label1
@@ -151,9 +166,68 @@ namespace HtmlPaperManager
             this.label1.TabIndex = 2;
             this.label1.Text = "HTML文件:";
             // 
+            // lblHtmlFolder
+            // 
+            this.lblHtmlFolder.AutoSize = true;
+            this.lblHtmlFolder.Location = new System.Drawing.Point(15, 50);
+            this.lblHtmlFolder.Name = "lblHtmlFolder";
+            this.lblHtmlFolder.Size = new System.Drawing.Size(65, 12);
+            this.lblHtmlFolder.TabIndex = 4;
+            this.lblHtmlFolder.Text = "HTML文件夹:";
+            // 
+            // txtHtmlFolderPath
+            // 
+            this.txtHtmlFolderPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtHtmlFolderPath.Location = new System.Drawing.Point(80, 47);
+            this.txtHtmlFolderPath.Name = "txtHtmlFolderPath";
+            this.txtHtmlFolderPath.Size = new System.Drawing.Size(640, 21);
+            this.txtHtmlFolderPath.TabIndex = 5;
+            // 
+            // btnSelectHtmlFolder
+            // 
+            this.btnSelectHtmlFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectHtmlFolder.Location = new System.Drawing.Point(730, 45);
+            this.btnSelectHtmlFolder.Name = "btnSelectHtmlFolder";
+            this.btnSelectHtmlFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectHtmlFolder.TabIndex = 6;
+            this.btnSelectHtmlFolder.Text = "选择文件夹";
+            this.btnSelectHtmlFolder.UseVisualStyleBackColor = true;
+            this.btnSelectHtmlFolder.Click += new System.EventHandler(this.btnSelectHtmlFolder_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "英文版:";
+            // 
+            // txtEnglishFilePath
+            // 
+            this.txtEnglishFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEnglishFilePath.Location = new System.Drawing.Point(80, 72);
+            this.txtEnglishFilePath.Name = "txtEnglishFilePath";
+            this.txtEnglishFilePath.Size = new System.Drawing.Size(640, 21);
+            this.txtEnglishFilePath.TabIndex = 8;
+            // 
+            // btnSelectEnglishFile
+            // 
+            this.btnSelectEnglishFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectEnglishFile.Location = new System.Drawing.Point(730, 70);
+            this.btnSelectEnglishFile.Name = "btnSelectEnglishFile";
+            this.btnSelectEnglishFile.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectEnglishFile.TabIndex = 9;
+            this.btnSelectEnglishFile.Text = "选择英文版";
+            this.btnSelectEnglishFile.UseVisualStyleBackColor = true;
+            this.btnSelectEnglishFile.Click += new System.EventHandler(this.btnSelectEnglishFile_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Controls.Add(this.btnGit);
             this.groupBox2.Controls.Add(this.btnMoveDown);
             this.groupBox2.Controls.Add(this.btnMoveUp);
             this.groupBox2.Controls.Add(this.btnAddComment);
@@ -164,10 +238,21 @@ namespace HtmlPaperManager
             this.groupBox2.Controls.Add(this.listPapers);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(750, 480);
+            this.groupBox2.Size = new System.Drawing.Size(750, 420);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "论文管理";
+            // 
+            // btnGit
+            // 
+            this.btnGit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGit.Location = new System.Drawing.Point(669, 176);
+            this.btnGit.Name = "btnGit";
+            this.btnGit.Size = new System.Drawing.Size(75, 30);
+            this.btnGit.TabIndex = 7;
+            this.btnGit.Text = "Git";
+            this.btnGit.UseVisualStyleBackColor = true;
+            this.btnGit.Click += new System.EventHandler(this.btnGit_Click);
             // 
             // btnMoveDown
             // 
@@ -256,7 +341,7 @@ namespace HtmlPaperManager
             this.listPapers.ItemHeight = 24;
             this.listPapers.Location = new System.Drawing.Point(15, 20);
             this.listPapers.Name = "listPapers";
-            this.listPapers.Size = new System.Drawing.Size(648, 448);
+            this.listPapers.Size = new System.Drawing.Size(648, 388);
             this.listPapers.TabIndex = 0;
             this.listPapers.SelectedIndexChanged += new System.EventHandler(this.listPapers_SelectedIndexChanged);
             this.listPapers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listPapers_MouseDoubleClick);
@@ -311,13 +396,37 @@ namespace HtmlPaperManager
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btnSearchInPreview);
+            this.groupBox4.Controls.Add(this.btnReplaceDivBlock);
             this.groupBox4.Controls.Add(this.txtPreview);
             this.groupBox4.Location = new System.Drawing.Point(3, 129);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(416, 348);
+            this.groupBox4.Size = new System.Drawing.Size(416, 288);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "HTML预览";
+            // 
+            // btnSearchInPreview
+            // 
+            this.btnSearchInPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearchInPreview.Location = new System.Drawing.Point(250, 16);
+            this.btnSearchInPreview.Name = "btnSearchInPreview";
+            this.btnSearchInPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchInPreview.TabIndex = 1;
+            this.btnSearchInPreview.Text = "搜索";
+            this.btnSearchInPreview.UseVisualStyleBackColor = true;
+            this.btnSearchInPreview.Click += new System.EventHandler(this.btnSearchInPreview_Click);
+            // 
+            // btnReplaceDivBlock
+            // 
+            this.btnReplaceDivBlock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReplaceDivBlock.Location = new System.Drawing.Point(331, 16);
+            this.btnReplaceDivBlock.Name = "btnReplaceDivBlock";
+            this.btnReplaceDivBlock.Size = new System.Drawing.Size(75, 23);
+            this.btnReplaceDivBlock.TabIndex = 2;
+            this.btnReplaceDivBlock.Text = "替换div块";
+            this.btnReplaceDivBlock.UseVisualStyleBackColor = true;
+            this.btnReplaceDivBlock.Click += new System.EventHandler(this.btnReplaceDivBlock_Click);
             // 
             // txtPreview
             // 
@@ -325,12 +434,12 @@ namespace HtmlPaperManager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPreview.Font = new System.Drawing.Font("Consolas", 9F);
-            this.txtPreview.Location = new System.Drawing.Point(15, 20);
+            this.txtPreview.Location = new System.Drawing.Point(15, 45);
             this.txtPreview.Multiline = true;
             this.txtPreview.Name = "txtPreview";
             this.txtPreview.ReadOnly = true;
             this.txtPreview.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPreview.Size = new System.Drawing.Size(391, 318);
+            this.txtPreview.Size = new System.Drawing.Size(391, 233);
             this.txtPreview.TabIndex = 0;
             this.txtPreview.WordWrap = false;
             this.txtPreview.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtPreview_MouseDoubleClick);
@@ -350,9 +459,9 @@ namespace HtmlPaperManager
             // btnToggleEnglish
             // 
             this.btnToggleEnglish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToggleEnglish.Location = new System.Drawing.Point(975, 530);
+            this.btnToggleEnglish.Location = new System.Drawing.Point(990, 540);
             this.btnToggleEnglish.Name = "btnToggleEnglish";
-            this.btnToggleEnglish.Size = new System.Drawing.Size(100, 35);
+            this.btnToggleEnglish.Size = new System.Drawing.Size(85, 25);
             this.btnToggleEnglish.TabIndex = 6;
             this.btnToggleEnglish.Text = "切换成英文版";
             this.btnToggleEnglish.UseVisualStyleBackColor = true;
@@ -361,9 +470,9 @@ namespace HtmlPaperManager
             // btnShowDebug
             // 
             this.btnShowDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowDebug.Location = new System.Drawing.Point(860, 530);
+            this.btnShowDebug.Location = new System.Drawing.Point(900, 540);
             this.btnShowDebug.Name = "btnShowDebug";
-            this.btnShowDebug.Size = new System.Drawing.Size(100, 35);
+            this.btnShowDebug.Size = new System.Drawing.Size(85, 25);
             this.btnShowDebug.TabIndex = 7;
             this.btnShowDebug.Text = "查看调试信息";
             this.btnShowDebug.UseVisualStyleBackColor = true;
@@ -373,9 +482,9 @@ namespace HtmlPaperManager
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
-            this.btnExport.Location = new System.Drawing.Point(1088, 530);
+            this.btnExport.Location = new System.Drawing.Point(1080, 540);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(100, 35);
+            this.btnExport.Size = new System.Drawing.Size(85, 25);
             this.btnExport.TabIndex = 4;
             this.btnExport.Text = "复制HTML";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -439,5 +548,14 @@ namespace HtmlPaperManager
         private System.Windows.Forms.Button btnToggleEnglish;
         private System.Windows.Forms.Button btnOpenFolder;
         private System.Windows.Forms.Button btnShowDebug;
+        private System.Windows.Forms.TextBox txtHtmlFolderPath;
+        private System.Windows.Forms.Label lblHtmlFolder;
+        private System.Windows.Forms.Button btnSelectHtmlFolder;
+        private System.Windows.Forms.TextBox txtEnglishFilePath;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnSelectEnglishFile;
+        private System.Windows.Forms.Button btnReplaceDivBlock;
+        private System.Windows.Forms.Button btnGit;
+        private System.Windows.Forms.Button btnSearchInPreview;
     }
 }
