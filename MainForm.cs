@@ -1250,6 +1250,14 @@ namespace HtmlPaperManager
                 Size = new Size(100, 30)
             };
 
+            // Git Pull按钮
+            Button btnGitPull = new Button()
+            {
+                Text = "git pull",
+                Location = new Point(120, 80),
+                Size = new Size(100, 30)
+            };
+
             // 输出文本框
             TextBox txtOutput = new TextBox()
             {
@@ -1274,14 +1282,49 @@ namespace HtmlPaperManager
                 ExecuteGitCommand($"git commit -m \"{txtCommitMsg.Text}\"", workingDirectory, txtOutput);
             };
             btnGitPush.Click += (s, e) => ExecuteGitCommand("git push", workingDirectory, txtOutput);
+            btnGitPull.Click += (s, e) => 
+            {
+                ExecuteGitCommand("git pull", workingDirectory, txtOutput);
+                // git pull后刷新条目解析
+                RefreshAfterGitPull();
+            };
 
             // 添加控件
             gitForm.Controls.AddRange(new Control[] 
             { 
-                lblWorkDir, btnGitAdd, lblCommitMsg, txtCommitMsg, btnGitCommit, btnGitPush, txtOutput 
+                lblWorkDir, btnGitAdd, lblCommitMsg, txtCommitMsg, btnGitCommit, btnGitPush, btnGitPull, txtOutput 
             });
 
             gitForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Git Pull后刷新条目解析
+        /// </summary>
+        private void RefreshAfterGitPull()
+        {
+            try
+            {
+                // 重新加载当前HTML文件
+                if (!string.IsNullOrEmpty(currentHtmlPath) && File.Exists(currentHtmlPath))
+                {
+                    LoadHtmlFile(currentHtmlPath);
+                    ShowNotification("Git pull完成，已刷新条目", Color.Green);
+                }
+                else if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
+                {
+                    LoadHtmlFile(txtFilePath.Text);
+                    ShowNotification("Git pull完成，已刷新条目", Color.Green);
+                }
+                else
+                {
+                    ShowNotification("Git pull完成，但无法刷新条目（未找到HTML文件）", Color.Orange);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowNotification($"刷新条目失败: {ex.Message}", Color.Red);
+            }
         }
 
         private void ExecuteGitCommand(string command, string workingDirectory, TextBox outputTextBox)
@@ -1445,6 +1488,280 @@ namespace HtmlPaperManager
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 在浏览器中打开index.html按钮点击事件
+        /// </summary>
+        private void btnOpenInBrowser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string indexPath = "";
+                
+                // 优先使用HTML文件夹路径下的index.html
+                if (!string.IsNullOrEmpty(txtHtmlFolderPath.Text) && Directory.Exists(txtHtmlFolderPath.Text))
+                {
+                    indexPath = Path.Combine(txtHtmlFolderPath.Text, "index.html");
+                }
+                else if (!string.IsNullOrEmpty(currentHtmlPath))
+                {
+                    string dir = Path.GetDirectoryName(currentHtmlPath);
+                    indexPath = Path.Combine(dir, "index.html");
+                }
+
+                if (!File.Exists(indexPath))
+                {
+                    MessageBox.Show($"找不到index.html文件:\n{indexPath}", "文件不存在", 
+                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 使用默认浏览器打开
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = indexPath,
+                    UseShellExecute = true
+                });
+
+                ShowNotification("已在浏览器中打开index.html", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"无法打开浏览器:\n{ex.Message}", "打开失败", 
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 在浏览器中打开英文版HTML按钮点击事件
+        /// </summary>
+        private void btnOpenEnglishInBrowser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string englishPath = txtEnglishFilePath.Text.Trim();
+                
+                if (string.IsNullOrEmpty(englishPath))
+                {
+                    MessageBox.Show("请先设置英文版文件路径", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (!File.Exists(englishPath))
+                {
+                    MessageBox.Show($"英文版文件不存在:\n{englishPath}", "文件不存在", 
+                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 使用默认浏览器打开
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = englishPath,
+                    UseShellExecute = true
+                });
+
+                ShowNotification("已在浏览器中打开英文版", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"无法打开浏览器:\n{ex.Message}", "打开失败", 
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 检查PDF按钮点击事件 - 改进版
+        /// </summary>
+        private void btnCheckPdf_Click(object sender, EventArgs e)
+        {
+            if (papers == null || papers.Count == 0)
+            {
+                MessageBox.Show("没有论文条目可检查", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtHtmlFolderPath.Text) || !Directory.Exists(txtHtmlFolderPath.Text))
+            {
+                MessageBox.Show("请先设置有效的HTML文件夹路径", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 只检测PDF链接不为空的论文条目
+            var pdfPapers = papers.Where(p => p.EntryType == PaperEntryType.Paper && 
+                                            !string.IsNullOrWhiteSpace(p.PdfLink)).ToList();
+
+            if (pdfPapers.Count == 0)
+            {
+                MessageBox.Show("没有包含PDF链接的论文条目", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var existingPapers = new List<Paper>();
+            var missingPapers = new List<(Paper paper, string fullPath)>();
+
+            foreach (var paper in pdfPapers)
+            {
+                string pdfPath = paper.PdfLink.Trim();
+                
+                // 处理相对路径
+                if (!Path.IsPathRooted(pdfPath))
+                {
+                    if (pdfPath.StartsWith("./"))
+                    {
+                        pdfPath = pdfPath.Substring(2);
+                    }
+                    pdfPath = Path.Combine(txtHtmlFolderPath.Text, pdfPath);
+                }
+
+                if (File.Exists(pdfPath))
+                {
+                    existingPapers.Add(paper);
+                }
+                else
+                {
+                    missingPapers.Add((paper, pdfPath));
+                }
+            }
+
+            // 创建美观简洁的检查结果对话框
+            ShowPdfCheckResult(pdfPapers.Count, existingPapers, missingPapers);
+        }
+
+        /// <summary>
+        /// 显示美观简洁的PDF检查结果
+        /// </summary>
+        private void ShowPdfCheckResult(int totalCount, List<Paper> existingPapers, List<(Paper paper, string fullPath)> missingPapers)
+        {
+            Form resultForm = new Form()
+            {
+                Text = "PDF文件检查结果",
+                Size = new Size(650, 550),
+                StartPosition = FormStartPosition.CenterParent,
+                ShowIcon = false,
+                MinimumSize = new Size(500, 400)
+            };
+
+            // 统计信息面板
+            Panel summaryPanel = new Panel()
+            {
+                Height = 80,
+                Dock = DockStyle.Top,
+                BackColor = Color.FromArgb(245, 245, 245)
+            };
+
+            Label lblTotal = new Label()
+            {
+                Text = $"总数: {totalCount}",
+                Location = new Point(20, 15),
+                Size = new Size(100, 25),
+                Font = new Font("Microsoft YaHei", 10, FontStyle.Bold),
+                ForeColor = Color.FromArgb(64, 64, 64)
+            };
+
+            Label lblExists = new Label()
+            {
+                Text = $"存在: {existingPapers.Count}",
+                Location = new Point(140, 15),
+                Size = new Size(100, 25),
+                Font = new Font("Microsoft YaHei", 10, FontStyle.Bold),
+                ForeColor = Color.FromArgb(46, 125, 50)
+            };
+
+            Label lblMissing = new Label()
+            {
+                Text = $"缺失: {missingPapers.Count}",
+                Location = new Point(260, 15),
+                Size = new Size(100, 25),
+                Font = new Font("Microsoft YaHei", 10, FontStyle.Bold),
+                ForeColor = missingPapers.Count > 0 ? Color.FromArgb(198, 40, 40) : Color.FromArgb(100, 100, 100)
+            };
+
+            // 成功率
+            double successRate = totalCount > 0 ? (existingPapers.Count * 100.0 / totalCount) : 0;
+            Label lblRate = new Label()
+            {
+                Text = $"成功率: {successRate:F1}%",
+                Location = new Point(380, 15),
+                Size = new Size(120, 25),
+                Font = new Font("Microsoft YaHei", 10, FontStyle.Bold),
+                ForeColor = successRate >= 90 ? Color.FromArgb(46, 125, 50) : 
+                          successRate >= 70 ? Color.FromArgb(255, 152, 0) : Color.FromArgb(198, 40, 40)
+            };
+
+            summaryPanel.Controls.AddRange(new Control[] { lblTotal, lblExists, lblMissing, lblRate });
+
+            // 详细结果文本框
+            TextBox txtResult = new TextBox()
+            {
+                Multiline = true,
+                ScrollBars = ScrollBars.Vertical,
+                ReadOnly = true,
+                Dock = DockStyle.Fill,
+                Font = new Font("Consolas", 9),
+                BackColor = Color.White,
+                BorderStyle = BorderStyle.None
+            };
+
+            // 构建详细结果文本
+            var resultText = new StringBuilder();
+            
+            if (existingPapers.Count > 0)
+            {
+                resultText.AppendLine("✅ 存在的PDF文件:");
+                resultText.AppendLine(new string('─', 50));
+                foreach (var paper in existingPapers)
+                {
+                    // 截取过长的标题
+                    string title = paper.Title.Length > 60 ? paper.Title.Substring(0, 57) + "..." : paper.Title;
+                    resultText.AppendLine($"  • {title}");
+                }
+                resultText.AppendLine();
+            }
+
+            if (missingPapers.Count > 0)
+            {
+                resultText.AppendLine("❌ 缺失的PDF文件:");
+                resultText.AppendLine(new string('─', 50));
+                foreach (var (paper, fullPath) in missingPapers)
+                {
+                    string title = paper.Title.Length > 40 ? paper.Title.Substring(0, 37) + "..." : paper.Title;
+                    resultText.AppendLine($"  • {title}");
+                    resultText.AppendLine($"    路径: {fullPath}");
+                    resultText.AppendLine();
+                }
+            }
+
+            if (missingPapers.Count == 0 && existingPapers.Count > 0)
+            {
+                resultText.AppendLine("🎉 所有PDF文件都存在！");
+            }
+
+            txtResult.Text = resultText.ToString();
+
+            // 按钮面板
+            Panel buttonPanel = new Panel()
+            {
+                Height = 50,
+                Dock = DockStyle.Bottom
+            };
+
+            Button btnClose = new Button()
+            {
+                Text = "关闭",
+                Size = new Size(75, 30),
+                Location = new Point(resultForm.Width - 95, 10),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Right
+            };
+
+            btnClose.Click += (s, args) => resultForm.Close();
+            buttonPanel.Controls.Add(btnClose);
+
+            resultForm.Controls.Add(txtResult);
+            resultForm.Controls.Add(summaryPanel);
+            resultForm.Controls.Add(buttonPanel);
+            resultForm.ShowDialog();
         }
     }
 }

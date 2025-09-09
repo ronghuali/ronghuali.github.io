@@ -1,4 +1,5 @@
-*.7z
+# *.7z
+# *.zip
 
 # Build results
 [Dd]ebug/

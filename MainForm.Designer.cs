@@ -32,6 +32,7 @@ namespace HtmlPaperManager
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
+            this.btnOpenInBrowser = new System.Windows.Forms.Button();
             this.btnOpenFolder = new System.Windows.Forms.Button();
             this.txtHtmlFolderPath = new System.Windows.Forms.TextBox();
             this.lblHtmlFolder = new System.Windows.Forms.Label();
@@ -39,9 +40,11 @@ namespace HtmlPaperManager
             this.txtEnglishFilePath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSelectEnglishFile = new System.Windows.Forms.Button();
+            this.btnOpenEnglishInBrowser = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnGit = new System.Windows.Forms.Button();
+            this.btnCheckPdf = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnMoveUp = new System.Windows.Forms.Button();
             this.btnAddComment = new System.Windows.Forms.Button();
@@ -79,6 +82,7 @@ namespace HtmlPaperManager
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnSelectEnglishFile);
+            this.groupBox1.Controls.Add(this.btnOpenEnglishInBrowser);
             this.groupBox1.Controls.Add(this.txtEnglishFilePath);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnSelectHtmlFolder);
@@ -87,6 +91,7 @@ namespace HtmlPaperManager
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtFilePath);
             this.groupBox1.Controls.Add(this.btnSelectFile);
+            this.groupBox1.Controls.Add(this.btnOpenInBrowser);
             this.groupBox1.Controls.Add(this.btnOpenFolder);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -137,10 +142,21 @@ namespace HtmlPaperManager
             this.btnSelectFile.UseVisualStyleBackColor = true;
             this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
             // 
-            // btnOpenFolder
+            // btnOpenInBrowser
+            // 
+            this.btnOpenInBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenInBrowser.Location = new System.Drawing.Point(811, 20);
+            this.btnOpenInBrowser.Name = "btnOpenInBrowser";
+            this.btnOpenInBrowser.Size = new System.Drawing.Size(90, 23);
+            this.btnOpenInBrowser.TabIndex = 10;
+            this.btnOpenInBrowser.Text = "在浏览器中打开";
+            this.btnOpenInBrowser.UseVisualStyleBackColor = true;
+            this.btnOpenInBrowser.Click += new System.EventHandler(this.btnOpenInBrowser_Click);
+            // 
+            // btnOpenFolder (移到HTML文件夹右侧)
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.Location = new System.Drawing.Point(811, 20);
+            this.btnOpenFolder.Location = new System.Drawing.Point(811, 45);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(90, 23);
             this.btnOpenFolder.TabIndex = 3;
@@ -224,9 +240,21 @@ namespace HtmlPaperManager
             this.btnSelectEnglishFile.UseVisualStyleBackColor = true;
             this.btnSelectEnglishFile.Click += new System.EventHandler(this.btnSelectEnglishFile_Click);
             // 
+            // btnOpenEnglishInBrowser
+            // 
+            this.btnOpenEnglishInBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenEnglishInBrowser.Location = new System.Drawing.Point(811, 70);
+            this.btnOpenEnglishInBrowser.Name = "btnOpenEnglishInBrowser";
+            this.btnOpenEnglishInBrowser.Size = new System.Drawing.Size(90, 23);
+            this.btnOpenEnglishInBrowser.TabIndex = 12;
+            this.btnOpenEnglishInBrowser.Text = "在浏览器中打开";
+            this.btnOpenEnglishInBrowser.UseVisualStyleBackColor = true;
+            this.btnOpenEnglishInBrowser.Click += new System.EventHandler(this.btnOpenEnglishInBrowser_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Controls.Add(this.btnCheckPdf);
             this.groupBox2.Controls.Add(this.btnGit);
             this.groupBox2.Controls.Add(this.btnMoveDown);
             this.groupBox2.Controls.Add(this.btnMoveUp);
@@ -242,6 +270,17 @@ namespace HtmlPaperManager
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "论文管理";
+            // 
+            // btnCheckPdf
+            // 
+            this.btnCheckPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckPdf.Location = new System.Drawing.Point(669, 212);
+            this.btnCheckPdf.Name = "btnCheckPdf";
+            this.btnCheckPdf.Size = new System.Drawing.Size(75, 30);
+            this.btnCheckPdf.TabIndex = 11;
+            this.btnCheckPdf.Text = "检查PDF";
+            this.btnCheckPdf.UseVisualStyleBackColor = true;
+            this.btnCheckPdf.Click += new System.EventHandler(this.btnCheckPdf_Click);
             // 
             // btnGit
             // 
@@ -276,27 +315,27 @@ namespace HtmlPaperManager
             this.btnMoveUp.UseVisualStyleBackColor = true;
             this.btnMoveUp.Click += new System.EventHandler(this.btnMoveUp_Click);
             // 
-            // btnAddComment
-            // 
-            this.btnAddComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddComment.Location = new System.Drawing.Point(669, 320);
-            this.btnAddComment.Name = "btnAddComment";
-            this.btnAddComment.Size = new System.Drawing.Size(75, 30);
-            this.btnAddComment.TabIndex = 4;
-            this.btnAddComment.Text = "添加注释";
-            this.btnAddComment.UseVisualStyleBackColor = true;
-            this.btnAddComment.Click += new System.EventHandler(this.btnAddComment_Click);
-            // 
             // btnAddYear
             // 
             this.btnAddYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddYear.Location = new System.Drawing.Point(669, 284);
+            this.btnAddYear.Location = new System.Drawing.Point(669, 248);
             this.btnAddYear.Name = "btnAddYear";
             this.btnAddYear.Size = new System.Drawing.Size(75, 30);
             this.btnAddYear.TabIndex = 3;
             this.btnAddYear.Text = "添加年份";
             this.btnAddYear.UseVisualStyleBackColor = true;
             this.btnAddYear.Click += new System.EventHandler(this.btnAddYear_Click);
+            // 
+            // btnAddComment
+            // 
+            this.btnAddComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddComment.Location = new System.Drawing.Point(669, 284);
+            this.btnAddComment.Name = "btnAddComment";
+            this.btnAddComment.Size = new System.Drawing.Size(75, 30);
+            this.btnAddComment.TabIndex = 4;
+            this.btnAddComment.Text = "添加注释";
+            this.btnAddComment.UseVisualStyleBackColor = true;
+            this.btnAddComment.Click += new System.EventHandler(this.btnAddComment_Click);
             // 
             // btnDeletePaper
             // 
@@ -557,5 +596,8 @@ namespace HtmlPaperManager
         private System.Windows.Forms.Button btnReplaceDivBlock;
         private System.Windows.Forms.Button btnGit;
         private System.Windows.Forms.Button btnSearchInPreview;
+        private System.Windows.Forms.Button btnOpenInBrowser;
+        private System.Windows.Forms.Button btnCheckPdf;
+        private System.Windows.Forms.Button btnOpenEnglishInBrowser;
     }
 }
