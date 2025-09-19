@@ -41,6 +41,9 @@ namespace HtmlPaperManager
             this.label3 = new System.Windows.Forms.Label();
             this.btnSelectEnglishFile = new System.Windows.Forms.Button();
             this.btnOpenEnglishInBrowser = new System.Windows.Forms.Button();
+            this.lblUpdateTime = new System.Windows.Forms.Label();
+            this.txtUpdateTime = new System.Windows.Forms.TextBox();
+            this.btnSaveUpdateTime = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnGit = new System.Windows.Forms.Button();
@@ -90,6 +93,9 @@ namespace HtmlPaperManager
             this.groupBox1.Controls.Add(this.btnSelectHtmlFolder);
             this.groupBox1.Controls.Add(this.txtHtmlFolderPath);
             this.groupBox1.Controls.Add(this.lblHtmlFolder);
+            this.groupBox1.Controls.Add(this.lblUpdateTime);
+            this.groupBox1.Controls.Add(this.txtUpdateTime);
+            this.groupBox1.Controls.Add(this.btnSaveUpdateTime);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtFilePath);
             this.groupBox1.Controls.Add(this.btnSelectFile);
@@ -97,7 +103,7 @@ namespace HtmlPaperManager
             this.groupBox1.Controls.Add(this.btnOpenFolder);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1176, 120);
+            this.groupBox1.Size = new System.Drawing.Size(1176, 150);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "文件选择";
@@ -557,6 +563,32 @@ namespace HtmlPaperManager
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // lblUpdateTime
+            // 
+            this.lblUpdateTime.AutoSize = true;
+            this.lblUpdateTime.Location = new System.Drawing.Point(6, 95);
+            this.lblUpdateTime.Name = "lblUpdateTime";
+            this.lblUpdateTime.Size = new System.Drawing.Size(65, 12);
+            this.lblUpdateTime.TabIndex = 16;
+            this.lblUpdateTime.Text = "更新时间：";
+            // 
+            // txtUpdateTime
+            // 
+            this.txtUpdateTime.Location = new System.Drawing.Point(77, 92);
+            this.txtUpdateTime.Name = "txtUpdateTime";
+            this.txtUpdateTime.Size = new System.Drawing.Size(100, 21);
+            this.txtUpdateTime.TabIndex = 17;
+            // 
+            // btnSaveUpdateTime
+            // 
+            this.btnSaveUpdateTime.Location = new System.Drawing.Point(183, 90);
+            this.btnSaveUpdateTime.Name = "btnSaveUpdateTime";
+            this.btnSaveUpdateTime.Size = new System.Drawing.Size(60, 23);
+            this.btnSaveUpdateTime.TabIndex = 18;
+            this.btnSaveUpdateTime.Text = "保存";
+            this.btnSaveUpdateTime.UseVisualStyleBackColor = true;
+            this.btnSaveUpdateTime.Click += new System.EventHandler(this.btnSaveUpdateTime_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -608,6 +640,9 @@ namespace HtmlPaperManager
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.TextBox txtImport;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblUpdateTime;
+        private System.Windows.Forms.TextBox txtUpdateTime;
+        private System.Windows.Forms.Button btnSaveUpdateTime;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox txtPreview;
         private System.Windows.Forms.Button btnExport;

@@ -24,20 +24,45 @@ namespace HtmlPaperManager
         private StringBuilder debugInfo; // 调试信息
         private Form pdfCheckResultForm; // 非模态的PDF检查结果窗口
         private bool isEditMode = false; // 编辑模式标志
+        private string currentUpdateTime = ""; // 当前更新时间
+
+        private void LogDebug(string message)
+        {
+            // 只添加到debugInfo，这样可以通过调试按钮查看
+            if (debugInfo != null)
+            {
+                debugInfo.AppendLine($"{DateTime.Now}: {message}");
+            }
+        }
 
         public MainForm()
         {
-            InitializeComponent();
-            InitializeData();
-            LoadConfig();
-            
-            // 设置ListBox为自定义绘制模式以支持年份条目加粗
-            listPapers.DrawMode = DrawMode.OwnerDrawFixed;
-            listPapers.DrawItem += ListPapers_DrawItem;
-            
-            // 设置快捷键
-            this.KeyPreview = true;
-            this.KeyDown += MainForm_KeyDown;
+            try
+            {
+                InitializeComponent();
+                InitializeData();
+                LoadConfig();
+                
+                // 设置ListBox为自定义绘制模式以支持年份条目加粗
+                listPapers.DrawMode = DrawMode.OwnerDrawFixed;
+                listPapers.DrawItem += ListPapers_DrawItem;
+                
+                // 设置快捷键
+                this.KeyPreview = true;
+                this.KeyDown += MainForm_KeyDown;
+
+                // 调试信息
+                string logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "debug.log");
+                File.WriteAllText(logPath, "");
+                LogDebug($"应用程序启动完成");
+                LogDebug($"当前HTML路径: {currentHtmlPath}");
+                LogDebug($"HTML文件是否存在: {File.Exists(currentHtmlPath)}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"窗体初始化失败：{ex.Message}\n\n堆栈跟踪：{ex.StackTrace}", "初始化错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw; // 重新抛出异常以便Program.cs捕获
+            }
         }
 
         /// <summary>
@@ -235,9 +260,11 @@ namespace HtmlPaperManager
 
         private void LoadConfig()
         {
+            LogDebug("开始加载配置");
             try
             {
                 config = AppConfig.Load();
+                LogDebug($"加载配置完成，LastOpenedFile: '{config.LastOpenedFile}'");
                 
                 // 设置HTML文件夹路径
                 if (!string.IsNullOrEmpty(config.HtmlFolderPath))
@@ -254,12 +281,14 @@ namespace HtmlPaperManager
                 // 加载上次打开的文件
                 if (!string.IsNullOrEmpty(config.LastOpenedFile) && File.Exists(config.LastOpenedFile))
                 {
+                    LogDebug($"准备加载上次打开的文件: {config.LastOpenedFile}");
                     LoadHtmlFile(config.LastOpenedFile, false);
                     // 根据当前文件路径更新其他路径
                     UpdatePathsFromCurrentFile();
                 }
                 else
                 {
+                    LogDebug("没有上次打开的文件或文件不存在");
                     // 如果没有上次打开的文件，但有其他路径配置，尝试更新
                     if (!string.IsNullOrEmpty(txtHtmlFolderPath.Text))
                     {
@@ -334,6 +363,9 @@ namespace HtmlPaperManager
                 
                 UpdatePreview();
                 SaveConfig();
+                
+                // 加载并显示更新时间
+                LoadAndDisplayUpdateTime();
                 
                 // 添加最终统计到调试信息
                 int paperCount = papers.Count(p => p.EntryType == PaperEntryType.Paper);
@@ -1197,6 +1229,102 @@ namespace HtmlPaperManager
         {
             UpdatePreview();
             ShowNotification("HTML预览已刷新", Color.FromArgb(46, 125, 50));
+        }
+
+        /// <summary>
+        /// 保存更新时间按钮点击事件
+        /// </summary>
+        private void btnSaveUpdateTime_Click(object sender, EventArgs e)
+        {
+            SaveUpdateTime();
+        }
+
+        /// <summary>
+        /// 保存更新时间到HTML文件
+        /// </summary>
+        private void SaveUpdateTime()
+        {
+            try
+            {
+                string newUpdateTime = txtUpdateTime.Text.Trim();
+                
+                if (string.IsNullOrEmpty(newUpdateTime))
+                {
+                    MessageBox.Show("更新时间不能为空", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 验证时间格式 (YYYY.M.D)
+                if (!System.Text.RegularExpressions.Regex.IsMatch(newUpdateTime, @"^\d{4}\.\d{1,2}\.\d{1,2}$"))
+                {
+                    MessageBox.Show("时间格式应为 YYYY.M.D，例如：2025.9.19", "格式错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(currentHtmlPath))
+                {
+                    MessageBox.Show("请先选择HTML文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 保存到HTML文件
+                bool success = htmlParser.SaveUpdateTime(currentHtmlPath, newUpdateTime);
+                
+                if (success)
+                {
+                    currentUpdateTime = newUpdateTime;
+                    ShowNotification($"更新时间已保存：{newUpdateTime}", Color.FromArgb(46, 125, 50));
+                }
+                else
+                {
+                    MessageBox.Show("保存更新时间失败", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"保存更新时间时出错：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// 加载并显示更新时间
+        /// </summary>
+        private void LoadAndDisplayUpdateTime()
+        {
+            try
+            {
+                LogDebug($"当前HTML路径: {currentHtmlPath}");
+                if (!string.IsNullOrEmpty(currentHtmlPath) && File.Exists(currentHtmlPath))
+                {
+                    LogDebug("开始读取更新时间...");
+                    string updateTime = htmlParser.ReadUpdateTime(currentHtmlPath);
+                    LogDebug($"读取到的更新时间: '{updateTime}'");
+                    if (!string.IsNullOrEmpty(updateTime))
+                    {
+                        currentUpdateTime = updateTime;
+                        txtUpdateTime.Text = updateTime;
+                        LogDebug($"设置文本框为: {updateTime}");
+                    }
+                    else
+                    {
+                        txtUpdateTime.Text = "";
+                        currentUpdateTime = "";
+                        LogDebug("未找到更新时间，清空文本框");
+                    }
+                }
+                else
+                {
+                    txtUpdateTime.Text = "";
+                    currentUpdateTime = "";
+                    LogDebug("HTML文件路径为空或文件不存在");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogDebug($"加载更新时间时出错：{ex.Message}");
+                txtUpdateTime.Text = "";
+                currentUpdateTime = "";
+            }
         }
 
         /// <summary>

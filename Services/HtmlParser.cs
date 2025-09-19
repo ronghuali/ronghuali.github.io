@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 using HtmlAgilityPack;
 using HtmlPaperManager.Models;
 
@@ -542,6 +543,81 @@ namespace HtmlPaperManager.Services
             if (yearMatch.Success)
             {
                 paper.Year = yearMatch.Groups[1].Value;
+            }
+        }
+        /// <summary>
+        /// 从HTML文件读取更新时间
+        /// </summary>
+        /// <param name="htmlFilePath">HTML文件路径</param>
+        /// <returns>更新时间字符串，如果未找到则返回null</returns>
+        public string ReadUpdateTime(string htmlFilePath)
+        {
+            try
+            {
+                // 读取文件内容
+                string content = File.ReadAllText(htmlFilePath, System.Text.Encoding.UTF8);
+                
+                // 查找更新时间
+                string pattern = "更新时间";
+                int index = content.IndexOf(pattern);
+                if (index >= 0)
+                {
+                    // 提取日期部分
+                    int start = index + pattern.Length;
+                    int end = content.IndexOfAny(new char[] { ' ', '<', '|' }, start);
+                    if (end > start)
+                    {
+                        string dateStr = content.Substring(start, end - start);
+                        return dateStr;
+                    }
+                }
+                
+                return null; // 未找到更新时间
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 保存更新时间到HTML文件
+        /// </summary>
+        /// <param name="htmlFilePath">HTML文件路径</param>
+        /// <param name="updateTime">更新时间字符串</param>
+        /// <returns>保存是否成功</returns>
+        public bool SaveUpdateTime(string htmlFilePath, string updateTime)
+        {
+            try
+            {
+                // 读取文件内容
+                string content = File.ReadAllText(htmlFilePath, System.Text.Encoding.UTF8);
+                
+                // 先读取当前文件中的更新时间
+                string currentUpdateTime = ReadUpdateTime(htmlFilePath);
+                if (currentUpdateTime == null)
+                {
+                    return false; // 未找到当前更新时间
+                }
+                
+                // 构造oldPattern和newPattern
+                string oldPattern = $"更新时间{currentUpdateTime}";
+                string newPattern = $"更新时间{updateTime}";
+                
+                if (content.Contains(oldPattern))
+                {
+                    content = content.Replace(oldPattern, newPattern);
+                    
+                    // 保存文件
+                    File.WriteAllText(htmlFilePath, content, System.Text.Encoding.UTF8);
+                    return true;
+                }
+                
+                return false; // 未找到需要替换的内容
+            }
+            catch
+            {
+                return false;
             }
         }
     }
