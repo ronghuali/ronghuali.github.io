@@ -476,31 +476,42 @@ namespace HtmlPaperManager.Services
                 // 清理输入文本
                 inputText = inputText.Trim();
                 
-                // 尝试解析标准格式：作者: 标题. 发表信息
-                var colonIndex = inputText.IndexOf(':');
-                if (colonIndex > 0)
+                // 优先尝试使用句号分割的格式：作者. 标题. 发表信息
+                // 这是学术论文最常见的引用格式
+                var parts = inputText.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                
+                if (parts.Length >= 3)
                 {
-                    // 提取作者部分
-                    paper.Authors = ProcessAuthors(inputText.Substring(0, colonIndex).Trim());
-                    
-                    // 处理标题和发表信息
-                    var remaining = inputText.Substring(colonIndex + 1).Trim();
-                    var lastDotIndex = remaining.LastIndexOf('.');
-                    
-                    if (lastDotIndex > 0)
-                    {
-                        paper.Title = remaining.Substring(0, lastDotIndex).Trim();
-                        paper.PublicationInfo = remaining.Substring(lastDotIndex + 1).Trim();
-                    }
-                    else
-                    {
-                        paper.Title = remaining;
-                    }
+                    // 标准三段格式：作者. 标题. 发表信息
+                    paper.Authors = ProcessAuthors(parts[0].Trim());
+                    paper.Title = parts[1].Trim();
+                    // 将剩余部分合并为发表信息（可能包含多个句号）
+                    paper.PublicationInfo = string.Join(". ", parts.Skip(2)).Trim();
+                }
+                else if (parts.Length == 2)
+                {
+                    // 两段格式：作者. 标题（无发表信息）
+                    paper.Authors = ProcessAuthors(parts[0].Trim());
+                    paper.Title = parts[1].Trim();
+                    paper.PublicationInfo = "";
                 }
                 else
                 {
-                    // 如果没有冒号，尝试其他解析方式
-                    paper.Title = inputText;
+                    // 只有一段，尝试使用冒号分割的备用格式：作者: 标题
+                    var colonIndex = inputText.IndexOf(':');
+                    if (colonIndex > 0)
+                    {
+                        paper.Authors = ProcessAuthors(inputText.Substring(0, colonIndex).Trim());
+                        paper.Title = inputText.Substring(colonIndex + 1).Trim();
+                        paper.PublicationInfo = "";
+                    }
+                    else
+                    {
+                        // 无法解析，将整个文本作为标题
+                        paper.Title = inputText;
+                        paper.Authors = "";
+                        paper.PublicationInfo = "";
+                    }
                 }
                 
                 // 提取年份
